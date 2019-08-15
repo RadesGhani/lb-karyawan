@@ -1,0 +1,40 @@
+{
+  "name": "inventaris",
+  "plural": "inventaris",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "postgresql": {
+    "schema": "rades",
+    "table": "inventaris"
+  },
+  "properties": {
+    "nama": {
+      "type": "string",
+      "required": true
+    },
+    "kategori": {
+      "type": "string",
+      "required": true
+    },
+    "jumlah": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "kategori_barang": {
+      "type": "belongsTo",
+      "model": "kategori_barang",
+      "foreignKey": "kategori",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

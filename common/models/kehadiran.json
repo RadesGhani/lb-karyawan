@@ -1,0 +1,48 @@
+{
+  "name": "kehadiran",
+  "plural": "kehadiran",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "postgresql": {
+    "schema": "rades",
+    "table": "kehadiran"
+  },
+
+  "properties": {
+    "user_id": {
+      "type": "number",
+      "required": false
+    },
+    "tanggal": {
+      "type": "string",
+      "required": true,
+      "format": "date"
+    },
+    "time_in": {
+      "type": "string",
+      "required": true,
+      "format": "time"
+    },
+    "time_out": {
+      "type": "string",
+      "required": true,
+      "format": "time"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "user_id",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,47 @@
+{
+  "name": "cuti",
+  "plural": "cuti",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "datePattern": "dd-MM-yyy",
+    "validateUpsert": true
+  },
+  "postgresql": {
+    "schema": "rades",
+    "table": "cuti"
+  },
+  "properties": {
+    "user_id": {
+      "type": "number",
+      "required": false
+    },
+    "start_date": {
+      "type": "string",
+      "required": true,
+      "format": "date"
+    },
+    "end_date": {
+      "type": "string",
+      "required": true,
+      "format": "date"
+    },
+    "keterangan": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "user_id",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

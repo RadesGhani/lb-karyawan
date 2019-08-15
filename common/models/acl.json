@@ -1,0 +1,13 @@
+{
+  "name": "acl",
+  "base": "ACL",
+  "postgresql": {
+    "schema": "rades",
+    "table": "acl"
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

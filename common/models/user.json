@@ -1,0 +1,157 @@
+{
+  "name": "user",
+  "plural": "user",
+  "base": "User",
+  "idInjection": true,
+  "restrictResetPasswordTokenScope": true,
+  "emailVerificationRequired": false,
+  "postgresql": {
+    "schema": "rades",
+    "table": "user"
+  },
+
+  "properties": {
+    "username": {
+      "type": "String",
+      "required": true
+    },
+     "email": {
+      "type": "string",
+      "required": true
+    },
+    "password": {
+      "type": "String",
+      "required": true
+    },
+    "tanggal_lahir": {
+      "type": "date",
+      "required": true
+    },
+    "gender": {
+      "type": "string",
+      "required": true,
+      "enum": [
+        "Male",
+        "Female"
+      ]
+    },
+     
+    "alamat": {
+      "type": "string",
+      "required": true
+    },
+    "no_telp": {
+      "type": "String",
+      "required": false
+    },
+    "team_project": {
+      "type": "Number",
+      "required": false
+    },
+    "join_date": {
+      "type": "date",
+      "required": true
+    },
+    "end_date": {
+      "type": "date",
+      "required": true
+    },
+ 
+    "status": {
+      "type": "String",
+      "required": true
+    }
+    
+
+  },
+  "validations": [],
+  "relations": {
+    "task": {
+      "type": "hasMany",
+      "model": "task",
+      "foreignKey": "user_id",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "cuti": {
+      "type": "hasMany",
+      "model": "cuti",
+      "foreignKey": "user_id",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "kehadiran": {
+      "type": "hasMany",
+      "model": "kehadiran",
+      "foreignKey": "user_id",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "divisi": {
+      "type": "belongsTo",
+      "model": "team_project",
+      "foreignKey": "team_project",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY",
+      "property": "create"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "create"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "deleteById"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "DENY",
+      "property": "deleteById"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

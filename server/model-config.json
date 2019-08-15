@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ]
+  },
+  "User": {
+    "dataSource": "postgresDs",
+    "public": false
+  },
+  "AccessToken": {
+    "dataSource": "postgresDs",
+    "public": true
+  },
+  "ACL": {
+    "dataSource": "postgresDs",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "postgresDs",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "postgresDs",
+    "public": false
+  },
+  "Email": {
+    "dataSource": "emailDs"
+  },
+  "user": {
+    "dataSource": "postgresDs",
+    "public": true,
+    "options": {}
+  },
+  "acl": {
+    "dataSource": "postgresDs",
+    "public": true,
+    "options": {}
+  },
+  "role": {
+    "dataSource": "postgresDs",
+    "public": true,
+    "options": {}
+  },
+  "roleMapping": {
+    "dataSource": "postgresDs",
+    "public": true,
+    "options": {}
+  },
+  "cuti": {
+    "dataSource": "postgresDs",
+    "public": true
+  },
+  "task": {
+    "dataSource": "postgresDs",
+    "public": true
+  },
+  "kehadiran": {
+    "dataSource": "postgresDs",
+    "public": true
+  },
+  "team_project": {
+    "dataSource": "postgresDs",
+    "public": true
+  },
+  "inventaris": {
+    "dataSource": "postgresDs",
+    "public": true
+  }
+ }

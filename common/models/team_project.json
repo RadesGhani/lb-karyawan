@@ -1,0 +1,45 @@
+{
+  "name": "team_project",
+  "plural": "team_project",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "postgresql": {
+    "schema": "rades",
+    "table": "team_project"
+  },
+
+  "properties": {
+    "id": {
+      "type": "number",
+      "required": false
+    },
+    "name_team": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "hasMany",
+      "model": "user",
+      "foreignKey": "team_project",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "task": {
+      "type": "hasMany",
+      "model": "task",
+      "foreignKey": "team_project",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
