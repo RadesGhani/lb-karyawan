@@ -16,29 +16,29 @@
           "rejectUnauthorized": false
         },
         "auth": {
-          "user": "baidarus215@gmail.com",
-          "pass": "rasah nrithik"
+          "user": "",
+          "pass": ""
         }
       }
     ]
   },
   "postgresDs": {
-    "host": "192.168.3.135",
-    "port": 5432,
-    "database": "project2",
-    "password": "123",
+    "host": "",
+    "port": ,
+    "database": "",
+    "password": "",
     "name": "postgresDs",
-    "user": "rades",
+    "user": "",
     "connector": "postgresql"
   },
   "mongoDs": {
     "host": "",
-    "port": 27017,
-    "url": "mongodb+srv://node-shop:node-shop@node-rest-shop-ljpsl.mongodb.net/test?retryWrites=true&w=majority",
-    "database": "node-rest-shop",
-    "password": "node-shop",
+    "port": ,
+    "url": "",
+    "database": "",
+    "password": "",
     "name": "mongoDs",
-    "user": "node-shop",
+    "user": "",
     "connector": "mongodb"
   }
 }
