@@ -5,6 +5,7 @@
   "idInjection": true,
   "restrictResetPasswordTokenScope": true,
   "emailVerificationRequired": false,
+  "inheritAcls": false,
   "postgresql": {
     "schema": "rades",
     "table": "user"
@@ -21,7 +22,8 @@
     },
     "password": {
       "type": "String",
-      "required": true
+      "required": true,
+      "default": "ayaya"
     },
     "tanggal_lahir": {
       "type": "date",
@@ -101,56 +103,59 @@
   },
   "acls": [
     {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "DENY"
+      "accessType":"READ",
+      "principalType":"ROLE",
+      "principalId":"$everyone",
+      "property":"*",
+      "permission":"DENY"
     },
     {
-      "accessType": "READ",
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "DENY"
+      "accessType":"READ",
+      "principalType":"ROLE",
+      "principalId":"$authenticated",
+      "property":"*",
+      "permission":"ALLOW"
     },
     {
-      "accessType": "READ",
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW"
+      "accessType":"EXECUTE",
+      "principalType":"ROLE",
+      "principalId":"$everyone",
+      "property":[
+        "create","deleteById","patchAttributes",
+        "__delete__cuti","__create__cuti", "__destroyById__cuti","__updateById__cuti",
+        "__delete__kehadiran","__create__kehadiran", "__destroyById__kehadiran","__updateById__kehadiran","__get__kehadiran"
+      ],
+      "permission":"DENY"
     },
     {
-      "accessType": "EXECUTE",
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "DENY",
-      "property": "create"
+      "accessType":"EXECUTE",
+      "principalType":"ROLE",
+      "principalId":"admin",
+      "property":[
+        "create","deleteById","patchAttributes",
+        "__create__cuti", "__destroyById__cuti","__updateById__cuti",
+        "__get__kehadiran"
+      ],
+      "permission":"ALLOW"
     },
     {
-      "accessType": "EXECUTE",
-      "principalType": "ROLE",
-      "principalId": "admin",
-      "permission": "ALLOW",
-      "property": "create"
+      "accessType":"EXECUTE",
+      "principalType":"ROLE",
+      "principalId":"$owner",
+      "property":[
+        "__create__cuti", "__destroyById__cuti","__updateById__cuti",
+        "__create__kehadiran", "__get__kehadiran"
+      ],
+      "permission":"ALLOW"
     },
     {
-      "accessType": "EXECUTE",
-      "principalType": "ROLE",
-      "principalId": "admin",
-      "permission": "ALLOW",
-      "property": "deleteById"
-    },
-    {
-      "accessType": "EXECUTE",
-      "principalType": "ROLE",
-      "principalId": "$owner",
-      "permission": "DENY",
-      "property": "deleteById"
-    },
-    {
-      "accessType": "WRITE",
-      "principalType": "ROLE",
-      "principalId": "admin",
-      "permission": "ALLOW"
+      "accessType":"EXECUTE",
+      "principalType":"ROLE",
+      "principalId":"admin-i",
+      "property":[
+        "__create__inventaris","__destroyById__inventaris","__updateById__inventaris"
+      ],
+      "permission":"ALLOW"
     }
   ],
   "methods": {}
