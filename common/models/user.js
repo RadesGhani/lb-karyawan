@@ -9,36 +9,32 @@ var path = require('path');
 //Replace this address with your actual address
 var senderAddress = 'noreply@loopback.com'; 
 
-module.exports = function(User) {
-  //delete User.validations.username;
-  //send verification email after registration
+//link website
+var frontend = "http://192.168.3.29:3000/reset_pass"; //frontend
+
+module.exports = function(User) {  
+  //logic untuk mengirim email selamat bergabung
   User.afterRemote('create', function(context, user, next) {
-    var options = {
-      type: 'email',
+    User.app.models.Email.send({
       to: user.email,
       from: senderAddress,
-      subject: 'Thanks for registering.',
-      template: path.resolve(__dirname, '../../server/views/verify.ejs'),
-      host: 'https://192.168.100.36',
-      text: 'Click the link bellow to complete your registration. You can login from the login page after that\n\t{href}',
-      user: user
-    };
-
-    user.verify(options, function(err) {
-      if (err) {
+      subject: 'Selamat bergabung di perusahaan kami.',
+      html: 'Selamat bergabung di perusahaan kami. Username untuk mengakses akun pegawai anda adalah <b>' + user.username + '</b>. Harap selesaikan registrasi akun pegawai anda dengan melakukan reset password melalui link berikut : ' + frontend + ' atau gunakan aplikasi mobile perusahaan.'
+    }, function(err) {
+      if (err){
         User.deleteById(user.id);
         return next(err);
       }
         return next();
+      })
     });
-  });
 
   //send password reset link when requested
   User.on('resetPasswordRequest', function(info) {
     var url = 'https://' + config.host + ':' + config.port + '/reset-password';
     /*var html = 'Click <a href="' + url + '?access_token=' +
         info.accessToken.id + '">here</a> to reset your password';*/
-      var html = 'access token to reset your password : '+ info.accessToken.id;
+      var html = 'access token untuk mereset password anda: '+ info.accessToken.id;
 
     User.app.models.Email.send({
       to: info.email,
@@ -51,6 +47,7 @@ module.exports = function(User) {
     });
   });
 
+  //logic apabila team_project tidak exist dalam POST
   User.observe('before save', function(ctx, next){
     if (ctx.instance && ctx.instance.team_project){
         return User.app.models.team_project.count({id: 
@@ -69,5 +66,5 @@ module.exports = function(User) {
         )
     }
     return next();
-});
+  });
 };
