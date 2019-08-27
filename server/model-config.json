@@ -68,6 +68,13 @@
   },
   "inventaris": {
     "dataSource": "mongoDs",
+<<<<<<< HEAD
+=======
+    "public": true
+  },
+  "profile": {
+    "dataSource": "mongoDs",
+>>>>>>> master
     "public": true
   }
- }
+}

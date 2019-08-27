@@ -47,24 +47,4 @@ module.exports = function(User) {
     });
   });
 
-  //logic apabila team_project tidak exist dalam POST
-  User.observe('before save', function(ctx, next){
-    if (ctx.instance && ctx.instance.team_project){
-        return User.app.models.team_project.count({id: 
-        ctx.instance.team_project
-
-        }).then(
-            res => {
-                if (res < 1){
-                    var err = {
-                        statusCode: "400",
-                        message: "Penambahan user error, team_project tidak eksis"
-                    };
-                    return Promise.reject(err);
-                }
-            }
-        )
-    }
-    return next();
-  });
 };
