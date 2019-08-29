@@ -104,7 +104,6 @@
     "marital_status": {
       "type": "string",
       "required": true
-      "type": "date"
     },
     "employee_status": {
       "type": "string"
