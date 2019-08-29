@@ -6,13 +6,15 @@
   "restrictResetPasswordTokenScope": true,
   "emailVerificationRequired": false,
   "postgresql": {
-    "schema": "rades",
+    "schema": "public",
     "table": "user"
   },
   "properties": {
     "username": {
       "type": "String",
-      "required": true
+      "required": true,
+      "max": 8,
+      "min": 2
     },
     "email": {
       "type": "string",
@@ -20,19 +22,14 @@
     },
     "password": {
       "type": "String",
-      "required": true
+      "required": true,
+      "max": 50,
+      "min": 8,
+      "pattern": "(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])^.*$"
     }
   },
   "validations": [],
   "relations": {
-    "task": {
-      "type": "hasMany",
-      "model": "task",
-      "foreignKey": "user_id",
-      "options": {
-        "nestRemoting": true
-      }
-    },
     "cuti": {
       "type": "hasMany",
       "model": "cuti",
@@ -44,6 +41,22 @@
     "kehadiran": {
       "type": "hasMany",
       "model": "kehadiran",
+      "foreignKey": "user_id",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "profiles": {
+      "type": "hasOne",
+      "model": "profile",
+      "foreignKey": "user_Id",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "salary": {
+      "type": "hasOne",
+      "model": "salary",
       "foreignKey": "user_id",
       "options": {
         "nestRemoting": true
@@ -103,6 +116,7 @@
       "principalId": "admin",
       "permission": "ALLOW"
     }
+
   ],
   "methods": {}
 }

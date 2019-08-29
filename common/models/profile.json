@@ -7,17 +7,17 @@
     "validateUpsert": true
   },
   "postgresql": {
-    "schema": "rades",
+    "schema": "public",
     "table": "profile"
   },
   "properties": {
+    
     "user_Id": {
       "type": "number",
       "required": true
     },
     "nik": {
-      "type": "number",
-      "required": true
+      "type": "number"
     },
     "name": {
       "type": "string",
@@ -31,39 +31,31 @@
       }
     },
     "sex": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "emp_position": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "office": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "dob": {
-      "type": "date",
-      "required": true
+      "type": "date"
     },
     "dob_place": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "address": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
-    "email": {
-      "type": "string",
-      "required": true
+    "email_address": {
+      "type": "string"
     },
     "home_phone": {
       "type": "number"
     },
     "mobile_phone": {
-      "type": "number",
-      "required": true
+      "type": "number"
     },
     "other_phone": {
       "type": "number"
@@ -72,63 +64,49 @@
       "type": "string"
     },
     "joining_date": {
-      "type": "date",
-      "required": true
+      "type": "date"
     },
     "employee_status": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "religion": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "marital_status": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "blood_tipe": {
       "type": "string"
     },
     "bank": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "account_number": {
-      "type": "number",
-      "required": true
+      "type": "number"
     },
     "branch": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "BPJS": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "DPLK": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "koperasi": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "health_insurance": {
-      "type": "number",
-      "required": true
+      "type": "number"
     },
     "emergency_name": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "emergency_number": {
-      "type": "number",
-      "required": true
+      "type": "number"
     },
     "relation_emergency": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "spouse_name": {
       "type": "string"
@@ -187,47 +165,37 @@
       "format": "date"
     },
     "ktp": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "ktp_number": {
-      "type": "number",
-      "required": true
+      "type": "number"
     },
     "kk": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "valid_through": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "ktp_address": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "npwp": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "major": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "school": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "certificate": {
       "type": "string"
     },
     "issued_by": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "date_issuance": {
-      "type": "date",
-      "required": true
+      "type": "date"
     },
     "degree_certificate": {
       "type": "string"
@@ -236,8 +204,7 @@
       "type": "string"
     },
     "team_project": {
-      "type": "string",
-      "required": true
+      "type": "string"
     }
   },
   "validations": [],

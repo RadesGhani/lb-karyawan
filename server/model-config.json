@@ -8,70 +8,70 @@
     ]
   },
   "User": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": false
   },
   "AccessToken": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": true
   },
   "ACL": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": false
   },
   "Role": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": false
   },
   "Email": {
     "dataSource": "emailDs"
   },
   "user": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": true,
     "options": {}
   },
   "acl": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": true,
     "options": {}
   },
   "role": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": true,
     "options": {}
   },
   "roleMapping": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": true,
     "options": {}
   },
   "cuti": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": true
   },
   "task": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": true
   },
   "kehadiran": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": true
   },
   "team_project": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": true
   },
   "inventaris": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": true
   },
   "profile": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": true
   }
 }
