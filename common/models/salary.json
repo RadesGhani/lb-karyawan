@@ -1,0 +1,45 @@
+{
+    "name": "salary",
+    "plural": "salary",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+      "validateUpsert": true
+    },
+    "postgresql": {
+      "schema": "public",
+      "table": "salary"
+    },
+    "properties": {
+      "user_id": {
+        "type": "number",
+        "required": true
+      },
+      "salary": {
+        "type": "number",
+        "required": true
+      },
+      "bonus": {
+        "type": "number",
+        "required": true
+      },
+      "total": {
+        "type": "number",
+        "required": true
+      }
+    },
+    "validations": [],
+    "relations": {
+      "user": {
+        "type": "belongsTo",
+        "model": "user",
+        "foreignKey": "user_id",
+        "options": {
+          "nestRemoting": true
+        }
+      }
+    },
+    "acls": [],
+    "methods": {}
+  }
+  
