@@ -21,6 +21,7 @@
     },
     "password": {
       "type": "String",
+      "default": "ayaya",
       "required": true
     }
   },
@@ -49,6 +50,14 @@
       "options": {
         "nestRemoting": true
       }
+    },
+    "profile": {
+      "type": "hasOne",
+      "model": "profile",
+      "foreignKey": "user_id",
+      "options": {
+        "nextRemoting" : true
+      }
     }
   },
   "acls": [
@@ -73,7 +82,8 @@
       "property":[
         "create","deleteById","patchAttributes",
         "__delete__cuti","__create__cuti", "__destroyById__cuti","__updateById__cuti",
-        "__delete__kehadiran","__create__kehadiran", "__destroyById__kehadiran","__updateById__kehadiran","__get__kehadiran"
+        "__delete__kehadiran","__create__kehadiran", "__destroyById__kehadiran","__updateById__kehadiran","__get__kehadiran",
+        "__delete__profile","__create__profile", "__destroyById__profile","__updateById__profile"
       ],
       "permission":"DENY"
     },
@@ -84,7 +94,8 @@
       "property":[
         "create","deleteById","patchAttributes",
         "__create__cuti", "__destroyById__cuti","__updateById__cuti",
-        "__get__kehadiran"
+        "__get__kehadiran",
+        "__delete__profile","__create__profile", "__destroyById__profile","__updateById__profile"
       ],
       "permission":"ALLOW"
     },
@@ -94,16 +105,8 @@
       "principalId":"$owner",
       "property":[
         "__create__cuti", "__destroyById__cuti","__updateById__cuti",
-        "__create__kehadiran", "__get__kehadiran"
-      ],
-      "permission":"ALLOW"
-    },
-    {
-      "accessType":"EXECUTE",
-      "principalType":"ROLE",
-      "principalId":"admin-i",
-      "property":[
-        "__create__inventaris","__destroyById__inventaris","__updateById__inventaris"
+        "__create__kehadiran", "__get__kehadiran",
+        "__delete__profile","__create__profile", "__destroyById__profile","__updateById__profile"
       ],
       "permission":"ALLOW"
     }
