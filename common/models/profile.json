@@ -54,12 +54,9 @@
       "type": "string",
       "required": true
     },
-    "email": {
+    "email_address": {
       "type": "string",
       "required": true
-    },
-    "home_phone": {
-      "type": "number"
     },
     "mobile_phone": {
       "type": "number",
@@ -228,6 +225,9 @@
     "date_issuance": {
       "type": "date",
       "required": true
+    },
+    "date_issuance": {
+      "type": "date"
     },
     "degree_certificate": {
       "type": "string"
