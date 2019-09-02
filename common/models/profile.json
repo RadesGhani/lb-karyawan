@@ -226,9 +226,6 @@
       "type": "date",
       "required": true
     },
-    "date_issuance": {
-      "type": "date"
-    },
     "degree_certificate": {
       "type": "string"
     },
