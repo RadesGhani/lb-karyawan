@@ -11,15 +11,32 @@
     "table": "inventaris"
   },
   "properties": {
-    "nama": {
+    "kode_barang": {
       "type": "string",
       "required": true
     },
-    "kategori": {
+    "nama_barang": {
       "type": "string",
       "required": true
+    },
+    "merk": {
+      "type": "string",
+      "required": true
+    },
+    "tanggal_masuk": {
+      "type": "string",
+      "required": true,
+      "format": "date"
     },
     "jumlah": {
+      "type": "number",
+      "required": true
+    },
+    "terpinjam": {
+      "type": "number",
+      "required": true
+    },
+    "sisa": {
       "type": "number",
       "required": true
     }
