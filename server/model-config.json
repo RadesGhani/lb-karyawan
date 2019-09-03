@@ -13,7 +13,7 @@
   },
   "AccessToken": {
     "dataSource": "mongoDs",
-    "public": true
+    "public": false
   },
   "ACL": {
     "dataSource": "mongoDs",
@@ -72,10 +72,6 @@
   },
   "profile": {
     "dataSource": "mongoDs",
-    "public": true
-  },
-  "profile": {
-    "dataSource": "postgresDs",
     "public": true
   }
 }

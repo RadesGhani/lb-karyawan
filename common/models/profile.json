@@ -54,30 +54,9 @@
       "type": "string",
       "required": true
     },
-    "email": {
+    "email_address": {
       "type": "string",
       "required": true
-    },
-    "emp_position": {
-      "type": "string"
-    },
-    "office": {
-      "type": "string"
-    },
-    "dob": {
-      "type": "date"
-    },
-    "dob_place": {
-      "type": "string"
-    },
-    "address": {
-      "type": "string"
-    },
-    "email_address": {
-      "type": "string"
-    },
-    "home_phone": {
-      "type": "number"
     },
     "mobile_phone": {
       "type": "number",
@@ -104,15 +83,6 @@
     "marital_status": {
       "type": "string",
       "required": true
-    },
-    "employee_status": {
-      "type": "string"
-    },
-    "religion": {
-      "type": "string"
-    },
-    "marital_status": {
-      "type": "string"
     },
     "blood_tipe": {
       "type": "string"
@@ -156,33 +126,6 @@
     "relation_emergency": {
       "type": "string",
       "required": true
-    },
-    "account_number": {
-      "type": "number"
-    },
-    "branch": {
-      "type": "string"
-    },
-    "BPJS": {
-      "type": "string"
-    },
-    "DPLK": {
-      "type": "string"
-    },
-    "koperasi": {
-      "type": "string"
-    },
-    "health_insurance": {
-      "type": "number"
-    },
-    "emergency_name": {
-      "type": "string"
-    },
-    "emergency_number": {
-      "type": "number"
-    },
-    "relation_emergency": {
-      "type": "string"
     },
     "spouse_name": {
       "type": "string"
@@ -272,27 +215,6 @@
       "type": "string",
       "required": true
     },
-    "ktp_number": {
-      "type": "number"
-    },
-    "kk": {
-      "type": "string"
-    },
-    "valid_through": {
-      "type": "string"
-    },
-    "ktp_address": {
-      "type": "string"
-    },
-    "npwp": {
-      "type": "string"
-    },
-    "major": {
-      "type": "string"
-    },
-    "school": {
-      "type": "string"
-    },
     "certificate": {
       "type": "string"
     },
@@ -303,9 +225,6 @@
     "date_issuance": {
       "type": "date",
       "required": true
-    },
-    "date_issuance": {
-      "type": "date"
     },
     "degree_certificate": {
       "type": "string"

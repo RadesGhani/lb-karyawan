@@ -11,6 +11,9 @@ var g = require('loopback/lib/globalize');
 var senderAddress = 'noreply@loopback.com'; 
 var frontend = "https://192.168.0.40:3000/reset_pass"; //frontend
 
+//link website
+var frontend = "http://192.168.3.29:3000/reset_pass"; //frontend
+
 module.exports = function(User) {  
   User.validatesLengthOf('username', {min: 2}); //username length
   User.validatesLengthOf('username', {max: 8}); //username length
@@ -35,7 +38,7 @@ module.exports = function(User) {
     var url = 'https://' + config.host + ':' + config.port + '/reset-password';
     /*var html = 'Click <a href="' + url + '?access_token=' +
         info.accessToken.id + '">here</a> to reset your password';*/
-      var html = 'access token to reset your password : '+ info.accessToken.id;
+      var html = 'access token untuk mereset password anda: '+ info.accessToken.id;
 
     User.app.models.Email.send({
       to: info.email,
