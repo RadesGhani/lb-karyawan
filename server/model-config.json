@@ -73,5 +73,9 @@
   "profile": {
     "dataSource": "mongoDs",
     "public": true
+  },
+  "salary": {
+    "dataSource": "mongoDs",
+    "public": true
   }
 }
