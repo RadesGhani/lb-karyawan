@@ -23,5 +23,19 @@
             "type": "number",
             "required" : true
         }
-    }
+    },
+    "validations": [],
+    "relations": {
+      "user": {
+        "type": "belongsTo",
+        "model": "user",
+        "foreignKey": "user_id",
+        "options": {
+          "nestRemoting": true
+        }
+      }
+    },
+    "acls": [],
+    "methods": {}
+
 }

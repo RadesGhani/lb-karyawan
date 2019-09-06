@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = function(Cuti) {
+    const app = require('../../server/server');
+    const models = app.models;
     let isDelete = false;
     let isDueValid = false;
     let dayMonthValid = false;
@@ -98,7 +100,7 @@ module.exports = function(Cuti) {
     
     //operation hook validasi tanggal cuti (POST/PUT)
     Cuti.observe('before save', function (ctx, next){
-        console.log(ctx);
+        console.log(models.saldo_cuti);
         let xdate, start; //start_date
         let ydate, end; //end-date
         
