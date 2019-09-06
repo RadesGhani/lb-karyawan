@@ -12,10 +12,6 @@
     "table": "cuti"
   },
   "properties": {
-     "user_id": {
-      "type": "number",
-      "required": false
-    },
     "start_date": {
       "type": "string",
       "required": true,
@@ -25,14 +21,6 @@
       "type": "string",
       "required": true,
       "format": "date"
-    },
-    "jenis_cuti": {
-      "type": "string",
-      "required": true
-    },
-    "jumlah_hari": {
-      "type": "number",
-      "required": true
     },
     "keperluan": {
       "type": "string",
@@ -69,14 +57,6 @@
     "handover_task2": {
       "type": "string",
       "required": true
-    },
-    "cuti_reguler": {
-      "type": "string",
-      "required": true
-    },
-    "cuti_bonus": {
-      "type": "string",
-      "required": true
     }
   },
   "validations": [],
@@ -85,6 +65,14 @@
       "type": "belongsTo",
       "model": "user",
       "foreignKey": "user_id",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "saldo_cuti": {
+      "type": "belongsTo",
+      "model": "saldo_cuti",
+      "foreignKey": "saldo_cuti_id",
       "options": {
         "nestRemoting": true
       }

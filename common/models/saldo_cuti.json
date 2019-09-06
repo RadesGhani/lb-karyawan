@@ -8,7 +8,7 @@
     },
     "properties": {
         "user_id": {
-            "type": "number",
+            "type": "string",
             "required": true
         },
         "joining_date": {
@@ -27,12 +27,21 @@
     "validations": [],
     "relations": {
       "user": {
-        "type": "belongsTo",
+        "type": "hasMany",
         "model": "user",
         "foreignKey": "user_id",
         "options": {
           "nestRemoting": true
-        }
+        },
+        "through": "cuti_input"
+      },
+      "cuti_input": {
+          "type": "hasMany",
+          "model": "cuti_input",
+          "foreignKey": "saldo_cuti_id",
+          "options": {
+              "nestRemoting": true
+          }
       }
     },
     "acls": [],
