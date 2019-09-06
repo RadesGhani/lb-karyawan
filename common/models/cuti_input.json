@@ -1,6 +1,6 @@
 {
-  "name": "cuti",
-  "plural": "cuti",
+  "name": "cuti_input",
+  "plural": "cuti_input",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -25,6 +25,10 @@
       "type": "string",
       "required": true,
       "format": "date"
+    },
+    "jenis_cuti": {
+      "type": "string",
+      "required": true
     },
     "jumlah_hari": {
       "type": "number",
@@ -66,8 +70,12 @@
       "type": "string",
       "required": true
     },
-    "saldo_cuti": {
-      "type": "number",
+    "cuti_reguler": {
+      "type": "string",
+      "required": true
+    },
+    "cuti_bonus": {
+      "type": "string",
       "required": true
     }
   },

@@ -50,7 +50,11 @@
     "public": true,
     "options": {}
   },
-  "cuti": {
+  "cuti_input": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "saldo_cuti": {
     "dataSource": "mongoDs",
     "public": true
   },

@@ -1,0 +1,27 @@
+{
+    "name": "saldo_cuti",
+    "plural": "saldo_cuti",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+      "validateUpsert": true
+    },
+    "properties": {
+        "user_id": {
+            "type": "number",
+            "required": true
+        },
+        "joining_date": {
+            "type": "date",
+            "required": true
+        },
+        "cuti_reguler": {
+            "type": "number",
+            "required" : true
+        },
+        "cuti_bonus": {
+            "type": "number",
+            "required" : true
+        }
+    }
+}
