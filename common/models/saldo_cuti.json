@@ -17,11 +17,19 @@
         },
         "cuti_reguler": {
             "type": "number",
-            "required" : true
+            "required": true
         },
         "cuti_bonus": {
             "type": "number",
-            "required" : true
+            "required": true
+        },
+        "cuti_bonux_exp": {
+            "type": "date",
+            "required": "true"
+        },
+        "date": {
+            "type": "date",
+            "required": true
         }
     },
     "validations": [],
