@@ -7,6 +7,9 @@ var config = require('../../server/config.json');
 var path = require('path');
 var g = require('loopback/lib/globalize');
 
+const app = require('../../server/server');
+const models = app.models;
+
 //Replace this address with your actual address
 var senderAddress = 'noreply@loopback.com'; 
 var frontend = "https://192.168.0.40:3000/reset_pass"; //frontend
@@ -72,4 +75,11 @@ module.exports = function(User) {
     err.statusCode = 422;
     throw err;
   };
+
+  User.afterRemote('*.__get__saldo_cuti', function(ctx, unused, next){
+    {
+      console.log(models.saldo_cuti);
+      return next();
+    }
+  })
 };

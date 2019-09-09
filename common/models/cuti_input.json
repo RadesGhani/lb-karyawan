@@ -57,6 +57,26 @@
     "handover_task2": {
       "type": "string",
       "required": true
+    },
+    "saldo_cuti_reg_before":{
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "saldo_cuti_reg_after":{
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "saldo_cuti_bonus_before":{
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "saldo_cuti_bonus_after":{
+      "type": "number",
+      "required": true,
+      "default": 0
     }
   },
   "validations": [],
@@ -65,14 +85,6 @@
       "type": "belongsTo",
       "model": "user",
       "foreignKey": "user_id",
-      "options": {
-        "nestRemoting": true
-      }
-    },
-    "saldo_cuti": {
-      "type": "belongsTo",
-      "model": "saldo_cuti",
-      "foreignKey": "saldo_cuti_id",
       "options": {
         "nestRemoting": true
       }

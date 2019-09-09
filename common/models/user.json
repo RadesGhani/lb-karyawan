@@ -41,7 +41,7 @@
       }
     },
     "saldo_cuti": {
-      "type": "hasMany",
+      "type": "hasOne",
       "model": "saldo_cuti",
       "foreignKey": "user_id",
       "options":{

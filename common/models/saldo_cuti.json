@@ -35,21 +35,12 @@
     "validations": [],
     "relations": {
       "user": {
-        "type": "hasMany",
+        "type": "belongsTo",
         "model": "user",
         "foreignKey": "user_id",
         "options": {
           "nestRemoting": true
-        },
-        "through": "cuti_input"
-      },
-      "cuti_input": {
-          "type": "hasMany",
-          "model": "cuti_input",
-          "foreignKey": "saldo_cuti_id",
-          "options": {
-              "nestRemoting": true
-          }
+        }
       }
     },
     "acls": [],

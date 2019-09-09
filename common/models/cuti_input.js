@@ -1,8 +1,6 @@
 'use strict';
 
 module.exports = function(Cuti) {
-    const app = require('../../server/server');
-    const models = app.models;
     let isDelete = false;
     let isDueValid = false;
     let dayMonthValid = false;
@@ -10,6 +8,7 @@ module.exports = function(Cuti) {
     let dataEndDate = false;
     let date, Sdate, Edate, sdate, edate; //instance||currentInstance
     let today = new Date();
+    today.setDate(today.getDate() - 1);today.setHours(23);today.setMinutes(59);today.setSeconds(59);
     const err = {
         statusCode: "400",
         message: "ERROR : waktu cuti telah jatuh tempo."
@@ -43,12 +42,11 @@ module.exports = function(Cuti) {
         console.log("instance :\nstart_date = " + sdate + "\nend_date = " + edate);
         console.log("today : " + today);
 
-        if(sdate > today){
+        if(sdate >= today){
             isDueValid = true;
         }else{
             isDueValid = false;
         }
-
     }
     //END
 
