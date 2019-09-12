@@ -23,13 +23,9 @@
             "type": "number",
             "required": true
         },
-        "cuti_bonux_exp": {
+        "cuti_bonus_exp": {
             "type": "date",
             "required": "true"
-        },
-        "date": {
-            "type": "date",
-            "required": true
         }
     },
     "validations": [],

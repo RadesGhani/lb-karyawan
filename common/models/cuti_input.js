@@ -1,6 +1,9 @@
 'use strict';
 
 module.exports = function(Cuti) {
+
+    Cuti.validatesInclusionOf('cuti_type', {in: ['reg-first', 'bonus-first']});
+
     let isDelete = false;
     let isDueValid = false;
     let dayMonthValid = false;
@@ -28,19 +31,19 @@ module.exports = function(Cuti) {
 
     //Function untuk cek POST/PUT/DELETE & cek kadaluarsa
     function isDue(ctx){
-        console.log(ctx)
+        //console.log(ctx)
         if(typeof ctx.isNewInstance != "undefined" || isDelete){
            date = ctx.instance;
         }else{
            date = ctx.currentInstance;
         }
-        console.log(date)
+        //console.log(date)
         Sdate = [date.start_date.substr(0,4), date.start_date.substr(5,2) - 1, date.start_date.substr(8,2)];
         Edate = [date.end_date.substr(0,4), date.end_date.substr(5,2) - 1, date.end_date.substr(8,2)]
         sdate = new Date(Sdate[0], Sdate[1], Sdate[2]);
         edate = new Date(Edate[0], Edate[1], Edate[2]);
-        console.log("instance :\nstart_date = " + sdate + "\nend_date = " + edate);
-        console.log("today : " + today);
+        //console.log("instance :\nstart_date = " + sdate + "\nend_date = " + edate);
+        //console.log("today : " + today);
 
         if(sdate >= today){
             isDueValid = true;
@@ -52,7 +55,7 @@ module.exports = function(Cuti) {
 
     //Function validasi jumlah tanggal dan bulan
     function dayMonth(day, month, year){
-        console.log("\ndayMonth : " + day + " " + month + " " + year)
+        //console.log("\ndayMonth : " + day + " " + month + " " + year)
         if(day <= 31 && month == 0){
             dayMonthValid = true;
         }else if(day <= 29 && month == 2 && year%4 == 0){
@@ -98,28 +101,27 @@ module.exports = function(Cuti) {
     
     //operation hook validasi tanggal cuti (POST/PUT)
     Cuti.observe('before save', function (ctx, next){
-        console.log(models.saldo_cuti);
         let xdate, start; //start_date
         let ydate, end; //end-date
         
         isDue(ctx);
-        console.log("\nisDueValid = " + isDueValid)
+        //console.log("\nisDueValid = " + isDueValid)
         if(isDueValid != true){
             return Promise.reject(err);
         }
-        console.log("\ninput value : ")
+        //console.log("\ninput value : ")
         if(typeof ctx.data != "undefined"){
             if(typeof ctx.data.start_date != "undefined"){
                 xdate = [ctx.data.start_date.substr(0,4), ctx.data.start_date.substr(5,2) - 1, ctx.data.start_date.substr(8,2)];
                 start = new Date(xdate[0], xdate[1], xdate[2]);
                 dataStartDate = true;
-                console.log('start : ' + start);
+                //console.log('start : ' + start);
             };
             if(typeof ctx.data.end_date != "undefined"){
                 ydate = [ctx.data.end_date.substr(0,4), ctx.data.end_date.substr(5,2) - 1, ctx.data.end_date.substr(8,2)];
                 end = new Date(ydate[0], ydate[1], ydate[2]);
                 dataEndDate = true;
-                console.log('end : ' + end);
+                //console.log('end : ' + end);
             };
         }
         

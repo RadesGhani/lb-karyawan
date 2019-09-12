@@ -58,6 +58,10 @@
       "type": "string",
       "required": true
     },
+    "cuti_type":{
+      "type": "string",
+      "required": true
+    },
     "saldo_cuti_reg_before":{
       "type": "number",
       "required": true,
@@ -77,6 +81,10 @@
       "type": "number",
       "required": true,
       "default": 0
+    },
+    "date":{
+      "type": "date",
+      "required": true
     }
   },
   "validations": [],

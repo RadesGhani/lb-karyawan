@@ -117,7 +117,7 @@
       "property":[
         "create","deleteById","patchAttributes",
         "__delete__cuti_input","__create__cuti_input", "__destroyById__cuti_input","__updateById__cuti_input",
-        "__delete__saldo_cuti","__create__saldo_cuti", "__destroyById__saldo_cuti","__updateById__saldo_cuti",
+        "__destroy__saldo_cuti","__create__saldo_cuti", "__update__saldo_cuti",
         "__delete__kehadiran","__create__kehadiran", "__destroyById__kehadiran","__updateById__kehadiran","__get__kehadiran",
         "__get__profile","__delete__profile","__create__profile", "__destroyById__profile","__updateById__profile"
       ],

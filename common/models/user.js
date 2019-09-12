@@ -8,7 +8,6 @@ var path = require('path');
 var g = require('loopback/lib/globalize');
 
 const app = require('../../server/server');
-const models = app.models;
 
 //Replace this address with your actual address
 var senderAddress = 'noreply@loopback.com'; 
@@ -76,9 +75,89 @@ module.exports = function(User) {
     throw err;
   };
 
-  User.afterRemote('*.__get__saldo_cuti', function(ctx, unused, next){
+  User.afterRemote('create', function(context, user, next){
+    let today = new Date();
+    models.saldo_cuti.create([
+      {user_id : user.id, joining_date : today,
+      cuti_reguler : 0, cuti_bonus : 0, cuti_bonus_exp : today}
+    ],function(err){
+      if (err) throw (err);
+      console.log("saldo cuti for user " + user.username + " has been created")
+      return next();
+    })
+  })
+
+  User.beforeRemote('find', async (context, user) => {
+    const docs = await app.models.saldo_cuti.find();
+    // do something with docs, or apply a filter to find() to limit results.
+    console.log(docs);
+  });
+
+  {//remote-method cuti_input
+    let reg_before, reg_after, bonus_before, bonus_after;
+
+    User.beforeRemote('*.__create__cuti_input', async (context, err) => {
+      const docs = await app.models.saldo_cuti.find({where:{user_id : context.instance.id}});
+      console.log("user: " + docs[0].user_id + "\ncuti_type: " + context.args.data.cuti_type);
+      
+      let start_date = new Date(context.args.data.start_date.substr(0,4), context.args.data.start_date.substr(5,2) - 1, context.args.data.start_date.substr(8,2))
+      let end_date = new Date(context.args.data.end_date.substr(0,4), context.args.data.end_date.substr(5,2) - 1, context.args.data.end_date.substr(8,2))
+      let lama_cuti = end_date - start_date;
+      lama_cuti = (lama_cuti + 86400000) / 86400000;
+      
+      reg_before = docs[0].cuti_reguler;reg_after = docs[0].cuti_reguler;
+      bonus_before = docs[0].cuti_bonus;bonus_after = docs[0].cuti_bonus;
+
+      function hitung_cuti(g,h,i){
+        let x = g - lama_cuti;
+        if(x < 0){
+          let y = lama_cuti - g;
+          y = h - y;
+          if(y < 0){
+            console.log('gagal')
+          }else{
+            if(i == true){
+              reg_after = 0;
+              bonus_after = y;
+            }else{
+              reg_after = y;
+              bonus_after = 0;
+            }
+          }
+        }else{
+          if(i == true){
+            reg_after = x;
+          }else{
+            bonus_after = x;
+          }
+        }
+      }
+
+      {
+        let x = [docs[0].cuti_reguler, docs[0].cuti_bonus, true, false];
+        if(context.args.data.cuti_type == "reg-first"){
+          hitung_cuti(x[0],x[1],x[2])
+        }else{
+          hitung_cuti(x[1],x[0],x[3])
+        }
+      }
+
+      console.log(
+        "reg_before : " + reg_before +
+        "\nreg_after : " + reg_after +
+        "\nbonus_before : " + bonus_before +
+        "\nbonus_after : " + bonus_after
+      )
+      if (err) return (err);
+      return;
+    })
+
+  }
+  
+
+  User.beforeRemote('*.__create__saldo_cuti', function(context, unused, next){
     {
-      console.log(models.saldo_cuti);
+      console.log("OK");
       return next();
     }
   })
