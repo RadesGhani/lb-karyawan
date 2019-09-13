@@ -3,64 +3,58 @@
   "plural": "task",
   "base": "PersistedModel",
   "idInjection": true,
-  
   "options": {
-    "validateUpsert": true
+    "validateUpsert": true,
+    "forceId": false
   },
   "postgresql": {
-    "schema": "rades",
+    "schema": "public",
     "table": "task"
   },
   "properties": {
-    "team_project": {
+    "id": {
       "type": "number",
       "required": true
     },
-    "user_id": {
-      "type": "string",
-      "required": false
-    }, 
     "task": {
       "type": "string",
       "required": true
     },
-    "date": {
-      "type": "string",
-      "required": true,
-      "format": "date"
-    },
-    "name_project": {
-      "type": "string",
+    "team_name_id": {
+      "type": "number",
       "required": true
-    },
-    "status": {
-      "type": "string",
-      "required": true,
-      "enum": [
-        "unchecked", "checked"
-      ]
     }
   },
   "validations": [],
   "relations": {
-    "user": {
-      "type": "belongsTo",
-      "model": "user",
-      "foreignKey": "user_id",
-      "options": {
-        "nestRemoting": true
-      }
-    },
-    "divisi": {
+    "team_project": {
       "type": "belongsTo",
       "model": "team_project",
-      "foreignKey": "team_project",
+      "foreignKey": "team_name_id",
       "options": {
         "nestRemoting": true
       }
     }
   },
   "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "storeadmin",
+      "permission": "ALLOW"
+    }
   ],
   "methods": {}
 }

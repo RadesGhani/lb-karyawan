@@ -5,7 +5,6 @@
   "idInjection": true,
   "restrictResetPasswordTokenScope": true,
   "emailVerificationRequired": false,
-  "inheritAcls": false,
   "postgresql": {
     "schema": "public",
     "table": "user"
@@ -14,7 +13,7 @@
     "username": {
       "type": "String",
       "required": true,
-      "max": 8,
+      "max": 50,
       "min": 2
     },
     "email": {
@@ -23,18 +22,21 @@
     },
     "password": {
       "type": "String",
-      "default": "ayaya",
       "required": true,
       "max": 50,
       "min": 8,
-      "pattern": "(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])^.*$"
+      "pattern": "(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])^.*$",
+      "default": "ayaya"
+    },
+    "role": {
+      "type": "string"
     }
   },
   "validations": [],
   "relations": {
-    "cuti": {
+    "cuti_input": {
       "type": "hasMany",
-      "model": "cuti",
+      "model": "cuti_input",
       "foreignKey": "user_id",
       "options": {
         "nestRemoting": true
@@ -44,6 +46,14 @@
       "type": "hasMany",
       "model": "kehadiran",
       "foreignKey": "user_id",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "team_project": {
+      "type": "belongsTo",
+      "model": "team_project",
+      "foreignKey": "team_name_id",
       "options": {
         "nestRemoting": true
       }
@@ -64,12 +74,12 @@
         "nestRemoting": true
       }
     },
-    "profile": {
-      "type": "hasOne",
-      "model": "profile",
+    "pinjaman": {
+      "type": "hasMany",
+      "model": "pinjaman",
       "foreignKey": "user_id",
       "options": {
-        "nextRemoting" : true
+        "nestRemoting": true
       }
     }
   },
@@ -79,7 +89,7 @@
       "principalType":"ROLE",
       "principalId":"$everyone",
       "property":"*",
-      "permission":"DENY"
+      "permission":"ALLOW"
     },
     {
       "accessType":"READ",
@@ -88,17 +98,16 @@
       "property":"*",
       "permission":"ALLOW"
     },
-    {
-      "accessType":"EXECUTE",
+    {"accessType":"EXECUTE",
       "principalType":"ROLE",
       "principalId":"$everyone",
       "property":[
         "create","deleteById","patchAttributes",
         "__delete__cuti","__create__cuti", "__destroyById__cuti","__updateById__cuti",
         "__delete__kehadiran","__create__kehadiran", "__destroyById__kehadiran","__updateById__kehadiran","__get__kehadiran",
-        "__get__profile","__delete__profile","__create__profile", "__destroyById__profile","__updateById__profile"
+        "__get__profiles","__delete__profiles","__create__profiles", "__destroyById__profiles","__updateById__profiles", "__create__team_project__task", "__get__team_project", "__get__task"
       ],
-      "permission":"DENY"
+      "permission":"ALLOW"
     },
     {
       "accessType":"EXECUTE",
@@ -108,7 +117,7 @@
         "create","deleteById","patchAttributes",
         "__create__cuti", "__destroyById__cuti", "__updateById__cuti",
         "__get__kehadiran",
-        "__get__profile", "__create__profile", "__destroyById__profile","__updateById__profile"
+        "__get__profiles", "__create__profiles", "__destroy__profiles","__updateById__profiles", "__create__team_project__task", "__get__team_project", "__get__task", "__create__task"
       ],
       "permission":"ALLOW"
     },
@@ -119,11 +128,10 @@
       "property":[
         "__create__cuti", "__destroyById__cuti","__updateById__cuti",
         "__create__kehadiran", "__get__kehadiran",
-        "__get__profile", "__create__profile", "__updateById__profile"
+        "__get__profiles", "__create__profiles", "__updateById__profiles", "__find__profiles", "__get__team_project", "__get__task"
       ],
       "permission":"ALLOW"
     }
-
   ],
   "methods": {}
 }

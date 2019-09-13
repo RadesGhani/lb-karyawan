@@ -7,16 +7,15 @@
     "validateUpsert": true
   },
   "postgresql": {
-    "schema": "rades",
+    "schema": "public",
     "table": "team_project"
   },
-
   "properties": {
     "id": {
       "type": "number",
       "required": false
     },
-    "name_team": {
+    "team_name": {
       "type": "string",
       "required": true
     }
@@ -26,15 +25,15 @@
     "user": {
       "type": "hasMany",
       "model": "user",
-      "foreignKey": "team_project",
+      "foreignKey": "team_name_id",
       "options": {
         "nestRemoting": true
       }
     },
-    "task": {
+     "task": {
       "type": "hasMany",
       "model": "task",
-      "foreignKey": "team_project",
+      "foreignKey": "team_name_id",
       "options": {
         "nestRemoting": true
       }
