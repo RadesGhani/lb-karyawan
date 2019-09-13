@@ -75,9 +75,10 @@ module.exports = function(User) {
     throw err;
   };
 
+  //remote-method membuat saldo_cuti untuk karyawan baru
   User.afterRemote('create', function(context, user, next){
     let today = new Date();
-    models.saldo_cuti.create([
+    app.models.saldo_cuti.create([
       {user_id : user.id, joining_date : today,
       cuti_reguler : 0, cuti_bonus : 0, cuti_bonus_exp : today}
     ],function(err){
@@ -86,12 +87,6 @@ module.exports = function(User) {
       return next();
     })
   })
-
-  User.beforeRemote('find', async (context, user) => {
-    const docs = await app.models.saldo_cuti.find();
-    // do something with docs, or apply a filter to find() to limit results.
-    console.log(docs);
-  });
 
   {//remote-method cuti_input
     let reg_before, reg_after, bonus_before, bonus_after;
@@ -104,6 +99,11 @@ module.exports = function(User) {
       let end_date = new Date(context.args.data.end_date.substr(0,4), context.args.data.end_date.substr(5,2) - 1, context.args.data.end_date.substr(8,2))
       let lama_cuti = end_date - start_date;
       lama_cuti = (lama_cuti + 86400000) / 86400000;
+
+      const error = {
+        statusCode: "400",
+        message: "ERROR : Saldo cuti tidak mencukupi."
+      };
       
       reg_before = docs[0].cuti_reguler;reg_after = docs[0].cuti_reguler;
       bonus_before = docs[0].cuti_bonus;bonus_after = docs[0].cuti_bonus;
@@ -114,7 +114,7 @@ module.exports = function(User) {
           let y = lama_cuti - g;
           y = h - y;
           if(y < 0){
-            console.log('gagal')
+            throw (error);
           }else{
             if(i == true){
               reg_after = 0;
@@ -142,16 +142,29 @@ module.exports = function(User) {
         }
       }
 
+      context.args.data.saldo_cuti_reg_before = reg_before;
+      context.args.data.saldo_cuti_reg_after = reg_after;
+      context.args.data.saldo_cuti_bonus_before = bonus_before;
+      context.args.data.saldo_cuti_bonus_after = bonus_after;
+      
+      
       console.log(
-        "reg_before : " + reg_before +
-        "\nreg_after : " + reg_after +
-        "\nbonus_before : " + bonus_before +
-        "\nbonus_after : " + bonus_after
+        "reg_before : " + context.args.data.saldo_cuti_reg_before +
+        "\nreg_after : " + context.args.data.saldo_cuti_reg_after +
+        "\nbonus_before : " + context.args.data.saldo_cuti_bonus_before +
+        "\nbonus_after : " + context.args.data.saldo_cuti_bonus_after
       )
-      if (err) return (err);
       return;
     })
 
+    User.afterRemote('*.__create__cuti_input', function(context, unused, next){
+      app.models.saldo_cuti.update(
+        {cuti_reguler : reg_after, cuti_bonus : bonus_after}
+      ,function(err){
+        if (err) throw (err);
+        return next();
+      })
+    })
   }
   
 
