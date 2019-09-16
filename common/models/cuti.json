@@ -8,25 +8,25 @@
     "validateUpsert": true
   },
   "postgresql": {
-    "schema": "rades",
+    "schema": "public",
     "table": "cuti"
   },
   "properties": {
-     "user_id": {
+    "id_pengguna": {
       "type": "number",
       "required": false
     },
-    "start_date": {
+    "tgl_pengajuan": {
       "type": "string",
       "required": true,
       "format": "date"
     },
-    "end_date": {
+    "mulai_cuti": {
       "type": "string",
       "required": true,
       "format": "date"
     },
-    "jumlah_hari": {
+    "selesai_cuti": {
       "type": "number",
       "required": true
     },
@@ -34,49 +34,65 @@
       "type": "string",
       "required": true
     },
-    "done_task1": {
+    "tugas_selesai1": {
       "type": "string",
       "required": true
     },
-    "done_task2": {
+    "tugas_selesai2": {
       "type": "string",
       "required": true
     },
-    "on_process1": {
+    "tugas_berjalan1": {
       "type": "string",
       "required": true
     },
-    "on_process2": {
+    "tugas_berjalan2": {
       "type": "string",
       "required": true
     },
-    "on_process3": {
+    "tugas_berjalan3": {
       "type": "string",
       "required": true
     },
-    "handover_to": {
+    "alih_tangan": {
       "type": "string",
       "required": true
     },
-    "handover_task1": {
+    "tugas_alihan": {
       "type": "string",
       "required": true
     },
-    "handover_task2": {
+    "tugas_alihan2": {
       "type": "string",
       "required": true
     },
-    "saldo_cuti": {
+    "saldo_reg_awal": {
       "type": "number",
+      "required": true
+    },
+    "saldo_reg_akhir": {
+      "type": "number",
+      "required": true
+    },
+    "saldo_bonus_awal": {
+      "type": "number",
+      "required": true
+    },
+    "saldo_bonus_akhir": {
+      "type": "number",
+      "required": true
+    },
+    "tipe_cuti": {
+      "type": "string",
       "required": true
     }
   },
   "validations": [],
   "relations": {
-    "user": {
+    "pengguna": {
       "type": "belongsTo",
-      "model": "user",
-      "foreignKey": "user_id",
+      "model": "pengguna",
+      "foreignKey": "id_pengguna",
       "options": {
         "nestRemoting": true
       }

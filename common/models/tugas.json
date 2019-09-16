@@ -1,6 +1,6 @@
 {
-  "name": "task",
-  "plural": "task",
+  "name": "tugas",
+  "plural": "tugas",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -9,28 +9,28 @@
   },
   "postgresql": {
     "schema": "public",
-    "table": "task"
+    "table": "tugas"
   },
   "properties": {
     "id": {
       "type": "number",
       "required": true
     },
-    "task": {
+    "tugas": {
       "type": "string",
       "required": true
     },
-    "team_name_id": {
-      "type": "number",
+    "nama_tim": {
+      "type": "string",
       "required": true
     }
   },
   "validations": [],
   "relations": {
-    "team_project": {
+    "tim": {
       "type": "belongsTo",
-      "model": "team_project",
-      "foreignKey": "team_name_id",
+      "model": "tim",
+      "foreignKey": "nama_tim",
       "options": {
         "nestRemoting": true
       }

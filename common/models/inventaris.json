@@ -2,17 +2,18 @@
   "name": "inventaris",
   "plural": "inventaris",
   "base": "PersistedModel",
-  "idInjection": true,
+  "idInjection": false,
   "options": {
     "validateUpsert": true
   },
   "postgresql": {
-    "schema": "rades",
+    "schema": "public",
     "table": "inventaris"
   },
   "properties": {
     "kode_barang": {
       "type": "string",
+      "id": true,
       "required": true
     },
     "nama_barang": {
@@ -43,15 +44,22 @@
   },
   "validations": [],
   "relations": {
-    "kategori_barang": {
-      "type": "belongsTo",
-      "model": "kategori_barang",
-      "foreignKey": "kategori",
+    "pinjaman": {
+      "type": "hasMany",
+      "model": "pinjaman",
+      "foreignKey": "item_name",
       "options": {
         "nestRemoting": true
       }
     }
   },
-  "acls": [],
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    }
+  ],
   "methods": {}
 }

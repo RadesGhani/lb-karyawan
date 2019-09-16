@@ -1,13 +1,13 @@
 {
-  "name": "user",
-  "plural": "user",
+  "name": "pengguna",
+  "plural": "pengguna",
   "base": "User",
   "idInjection": true,
   "restrictResetPasswordTokenScope": true,
   "emailVerificationRequired": false,
   "postgresql": {
     "schema": "public",
-    "table": "user"
+    "table": "pengguna"
   },
   "properties": {
     "username": {
@@ -37,7 +37,7 @@
     "cuti_input": {
       "type": "hasMany",
       "model": "cuti_input",
-      "foreignKey": "user_id",
+      "foreignKey": "id_pengguna",
       "options": {
         "nestRemoting": true
       }
@@ -45,31 +45,31 @@
     "kehadiran": {
       "type": "hasMany",
       "model": "kehadiran",
-      "foreignKey": "user_id",
+      "foreignKey": "id_pengguna",
       "options": {
         "nestRemoting": true
       }
     },
-    "team_project": {
+    "tim": {
       "type": "belongsTo",
-      "model": "team_project",
+      "model": "tim",
       "foreignKey": "team_name_id",
       "options": {
         "nestRemoting": true
       }
     },
-    "profiles": {
+    "profil": {
       "type": "hasOne",
-      "model": "profile",
-      "foreignKey": "user_Id",
+      "model": "profil",
+      "foreignKey": "id_pengguna",
       "options": {
         "nestRemoting": true
       }
     },
-    "salary": {
+    "gaji": {
       "type": "hasOne",
-      "model": "salary",
-      "foreignKey": "user_id",
+      "model": "gaji      ",
+      "foreignKey": "id_pengguna",
       "options": {
         "nestRemoting": true
       }
@@ -77,7 +77,7 @@
     "pinjaman": {
       "type": "hasMany",
       "model": "pinjaman",
-      "foreignKey": "user_id",
+      "foreignKey": "id_pengguna",
       "options": {
         "nestRemoting": true
       }
@@ -105,7 +105,7 @@
         "create","deleteById","patchAttributes",
         "__delete__cuti","__create__cuti", "__destroyById__cuti","__updateById__cuti",
         "__delete__kehadiran","__create__kehadiran", "__destroyById__kehadiran","__updateById__kehadiran","__get__kehadiran",
-        "__get__profiles","__delete__profiles","__create__profiles", "__destroyById__profiles","__updateById__profiles", "__create__team_project__task", "__get__team_project", "__get__task"
+        "__get__profil","__delete__profil","__create__profil", "__destroyById__profil","__updateById__profil", "__create__team_project__task", "__get__team_project", "__get__task"
       ],
       "permission":"ALLOW"
     },
@@ -117,7 +117,7 @@
         "create","deleteById","patchAttributes",
         "__create__cuti", "__destroyById__cuti", "__updateById__cuti",
         "__get__kehadiran",
-        "__get__profiles", "__create__profiles", "__destroy__profiles","__updateById__profiles", "__create__team_project__task", "__get__team_project", "__get__task", "__create__task"
+        "__get__profil", "__create__profil", "__destroy__profil","__updateById__profil", "__create__team_project__task", "__get__team_project", "__get__task", "__create__task"
       ],
       "permission":"ALLOW"
     },
@@ -128,7 +128,7 @@
       "property":[
         "__create__cuti", "__destroyById__cuti","__updateById__cuti",
         "__create__kehadiran", "__get__kehadiran",
-        "__get__profiles", "__create__profiles", "__updateById__profiles", "__find__profiles", "__get__team_project", "__get__task"
+        "__get__profil", "__create__profil", "__updateById__profil", "__find__profil", "__get__team_project", "__get__task"
       ],
       "permission":"ALLOW"
     }

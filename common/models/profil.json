@@ -1,0 +1,233 @@
+{
+  "name": "profil",
+  "plural": "profil",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "postgresql": {
+    "schema": "public",
+    "table": "profil"
+  },
+  "properties": {
+    "id_pengguna": {
+      "type": "number",
+      "required": true
+    },
+    "nik": {
+      "type": "number"
+    },
+    "nama": {
+      "type": "string",
+      "required": true
+    },
+    "inisial": {
+      "type": "string",
+      "required": true,
+      "index": {
+        "unique": true
+      }
+    },
+    "jenis_kelamin": {
+      "type": "string"
+    },
+    "posisi_karyawan": {
+      "type": "string"
+    },
+    "kantor": {
+      "type": "string"
+    },
+    "tgl_lahir": {
+      "type": "string",
+      "format": "date"
+    },
+    "tempat_lahir": {
+      "type": "string"
+    },
+    "alamat": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "telepon_rumah": {
+      "type": "number"
+    },
+    "no_telepon": {
+      "type": "number"
+    },
+    "no_telepon_lainnya": {
+      "type": "number"
+    },
+    "ibu_kandung": {
+      "type": "string"
+    },
+    "tgl_masuk": {
+      "type": "string",
+      "format": "date"
+    },
+    "status_karyawan": {
+      "type": "string"
+    },
+    "agama": {
+      "type": "string"
+    },
+    "status_pernikahan": {
+      "type": "string"
+    },
+    "golongan_darah": {
+      "type": "string"
+    },
+    "bank": {
+      "type": "string"
+    },
+    "no_rekening": {
+      "type": "number"
+    },
+    "cabang": {
+      "type": "string"
+    },
+    "BPJS": {
+      "type": "string"
+    },
+    "DPLK": {
+      "type": "string"
+    },
+    "koperasi": {
+      "type": "string"
+    },
+    "asuransi_kesehatan": {
+      "type": "number"
+    },
+    "nama_darurat": {
+      "type": "string"
+    },
+    "no_darurat": {
+      "type": "number"
+    },
+    "relasi_darurat": {
+      "type": "string"
+    },
+    "nama_pasangan": {
+      "type": "string"
+    },
+    "tgl_lahir_pasangan": {
+      "type": "string",
+      "format": "date"
+    },
+    "nama_anak1": {
+      "type": "string"
+    },
+    "jenis_kelamin_anak1": {
+      "type": "string"
+    },
+    "tgl_lahir_anak1": {
+      "type": "string",
+      "format": "date"
+    },
+    "nama_anak2": {
+      "type": "string"
+    },
+    "jenis_kelamin_anak2": {
+      "type": "string"
+    },
+    "tgl_lahir_anak2": {
+      "type": "string",
+      "format": "date"
+    },
+    "nama_anak3": {
+      "type": "string"
+    },
+    "jenis_kelamin_anak3": {
+      "type": "string"
+    },
+    "tgl_lahir_anak3": {
+      "type": "string",
+      "format": "date"
+    },
+    "nama_anak4": {
+      "type": "string"
+    },
+    "jenis_kelamin_anak4": {
+      "type": "string"
+    },
+    "tgl_lahir_anak4": {
+      "type": "string",
+      "format": "date"
+    },
+    "nama_anak5": {
+      "type": "string"
+    },
+    "jenis_kelamin_anak5": {
+      "type": "string"
+    },
+    "tgl_lahir_anak5": {
+      "type": "string",
+      "format": "date"
+    },
+    "ktp": {
+      "type": "string"
+    },
+    "no_ktp": {
+      "type": "number"
+    },
+    "kk": {
+      "type": "string"
+    },
+    "masa_berlaku": {
+      "type": "string",
+      "format":"date"
+    },
+    "alamat_ktp": {
+      "type": "string"
+    },
+    "npwp": {
+      "type": "string"
+    },
+    "jurusan": {
+      "type": "string"
+    },
+    "pendidikan": {
+      "type": "string"
+    },
+    "ijazah": {
+      "type": "string"
+    },
+    "disahkan_oleh": {
+      "type": "string"
+    },
+    "tgl_pengesahan": {
+      "type": "string",
+      "format": "date"
+    },
+    "gelar": {
+      "type": "string"
+    },
+    "direkomendasikan": {
+      "type": "string"
+    },
+    "tim": {
+      "type": "string"
+    },
+    "email_1": {
+      "type": "string"
+    },
+    "email_2": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "pengguna": {
+      "type": "belongsTo",
+      "model": "pengguna",
+      "foreignKey": "id_pengguna",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

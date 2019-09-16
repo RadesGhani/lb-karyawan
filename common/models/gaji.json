@@ -1,6 +1,6 @@
 {
-    "name": "salary",
-    "plural": "salary",
+    "name": "gaji",
+    "plural": "gaji",
     "base": "PersistedModel",
     "idInjection": true,
     "options": {
@@ -8,14 +8,14 @@
     },
     "postgresql": {
       "schema": "public",
-      "table": "salary"
+      "table": "gaji"
     },
     "properties": {
-      "user_id": {
+      "id_pengguna": {
         "type": "number",
         "required": true
       },
-      "salary": {
+      "gaji": {
         "type": "number",
         "required": true
       },
@@ -26,6 +26,9 @@
       "total": {
         "type": "number",
         "required": true
+      },
+      "posisi_pegawai": {
+        "type": "string"
       }
     },
     "validations": [],
