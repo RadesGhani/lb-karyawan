@@ -8,70 +8,82 @@
     ]
   },
   "User": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": false
   },
   "AccessToken": {
-    "dataSource": "mongoDs",
-    "public": false
+    "dataSource": "postgresDs",
+    "public": true
   },
   "ACL": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "mongoDs",
-    "public": false
+    "dataSource": "postgresDs",
+    "public": true
   },
   "Role": {
-    "dataSource": "mongoDs",
-    "public": false
+    "dataSource": "postgresDs",
+    "public": true
   },
   "Email": {
     "dataSource": "emailDs"
   },
-  "user": {
-    "dataSource": "mongoDs",
+  "pengguna": {
+    "dataSource": "postgresDs",
     "public": true,
     "options": {}
   },
   "acl": {
-    "dataSource": "mongoDs",
-    "public": true,
+    "dataSource": "postgresDs",
+    "public": false,
     "options": {}
   },
   "role": {
-    "dataSource": "mongoDs",
-    "public": true,
+    "dataSource": "postgresDs",
+    "public": false,
     "options": {}
   },
   "roleMapping": {
-    "dataSource": "mongoDs",
-    "public": true,
+    "dataSource": "postgresDs",
+    "public": false,
     "options": {}
   },
   "cuti": {
-    "dataSource": "mongoDs",
-    "public": true
+    "dataSource": "postgresDs",
+    "public": false
   },
-  "task": {
-    "dataSource": "mongoDs",
+  "tugas": {
+    "dataSource": "postgresDs",
     "public": true
   },
   "kehadiran": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
+    "public": false
+  },
+  "tim": {
+    "dataSource": "postgresDs",
     "public": true
   },
-  "team_project": {
-    "dataSource": "mongoDs",
-    "public": true
+  "user_team": {
+    "dataSource": "postgresDs",
+    "public": false
   },
   "inventaris": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": true
   },
-  "profile": {
-    "dataSource": "mongoDs",
+  "profil": {
+    "dataSource": "postgresDs",
+    "public": true
+  },
+  "gaji": {
+    "dataSource": "postgresDs",
+    "public": false
+  },
+  "pinjaman": {
+    "dataSource": "postgresDs",
     "public": true
   }
 }
