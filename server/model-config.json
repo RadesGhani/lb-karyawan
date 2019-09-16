@@ -50,7 +50,7 @@
     "public": true,
     "options": {}
   },
-  "cuti_input": {
+  "cuti": {
     "dataSource": "mongoDs",
     "public": false
   },
@@ -75,6 +75,10 @@
     "public": false
   },
   "profile": {
+    "dataSource": "mongoDs",
+    "public": false
+  },
+  "notif": {
     "dataSource": "mongoDs",
     "public": false
   }
