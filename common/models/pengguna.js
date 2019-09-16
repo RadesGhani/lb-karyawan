@@ -1,5 +1,5 @@
 // Copyright IBM Corp. 2014,2019. All Rights Reserved.
-// Node module: loopback-example-user-management
+// Node module: loopback-example-pengguna-management
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
@@ -16,33 +16,33 @@ var frontend = "https://192.168.0.40:3000/reset_pass"; //frontend
 //link website
 var frontend = "http://192.168.3.29:3000/reset_pass"; //frontend
 
-module.exports = function(User) {  
-  User.validatesLengthOf('username', {min: 2}); //username length
-  User.validatesLengthOf('username', {max: 8}); //username length
-  User.validatesFormatOf('username', {with: /^[A-Za-z\\s]*$/});//username validation(only character type will be accepted)
+module.exports = function(Pengguna) {  
+  Pengguna.validatesLengthOf('username', {min: 2}); //username length
+  Pengguna.validatesLengthOf('username', {max: 8}); //username length
+  Pengguna.validatesFormatOf('username', {with: /^[A-Za-z\\s]*$/});//username validation(only character type will be accepted)
   //logic untuk mengirim email selamat bergabung
-  User.afterRemote('create', function(context, user, next) {
-    User.app.models.Email.send({
-      to: user.email,
+  Pengguna.afterRemote('create', function(context, pengguna, next) {
+    Pengguna.app.models.Email.send({
+      to: pengguna.email,
       from: senderAddress,
       subject: 'Selamat bergabung di perusahaan kami.',
-      html: 'Selamat bergabung di perusahaan kami. Username untuk mengakses akun pegawai anda adalah <b>' + user.username + '</b>. Harap selesaikan registrasi akun pegawai anda dengan melakukan reset password melalui link berikut : ' + frontend + ' atau gunakan aplikasi mobile perusahaan.'
+      html: 'Selamat bergabung di perusahaan kami. Username untuk mengakses akun pegawai anda adalah <b>' + pengguna.username + '</b>. Harap selesaikan registrasi akun pegawai anda dengan melakukan reset password melalui link berikut : ' + frontend + ' atau gunakan aplikasi mobile perusahaan.'
     }, function(err) {
       if (err){
-        User.deleteById(user.id);
+        Pengguna.deleteById(pengguna.id);
         return next(err);
       }
         return next();
       })
     });
   //send password reset link when requested
-  User.on('resetPasswordRequest', function(info) {
+  Pengguna.on('resetPasswordRequest', function(info) {
     var url = 'https://' + config.host + ':' + config.port + '/reset-password';
     /*var html = 'Click <a href="' + url + '?access_token=' +
         info.accessToken.id + '">here</a> to reset your password';*/
       var html = 'access token untuk mereset password anda: '+ info.accessToken.id;
 
-    User.app.models.Email.send({
+    Pengguna.app.models.Email.send({
       to: info.email,
       from: senderAddress,
       subject: 'Password reset',
@@ -55,9 +55,9 @@ module.exports = function(User) {
 
 //password validation
 
-  User.validatePassword = function(json) {
+  Pengguna.validatePassword = function(json) {
     var err,
-        passwordProperties = User.definition.properties.password;
+        passwordProperties = Pengguna.definition.properties.password;
 
     if (json.length > passwordProperties.max) {
       err = new Error (g.f('Password terlalu panjang: %s (maksimal %d karakter)', json, passwordProperties.max));
@@ -76,28 +76,28 @@ module.exports = function(User) {
   };
 
   //remote-method membuat saldo_cuti untuk karyawan baru
-  User.afterRemote('create', function(context, user, next){
+  Pengguna.afterRemote('create', function(context, pengguna, next){
     let today = new Date();
     app.models.saldo_cuti.create([
-      {user_id : user.id, joining_date : today,
+      {id_pengguna : pengguna.id, tanggal_masuk : today,
       cuti_reguler : 0, cuti_bonus : 0, cuti_bonus_exp : today}
     ],function(err){
       if (err) throw (err);
-      console.log("saldo cuti for user " + user.username + " has been created")
+      console.log("saldo cuti for pengguna " + pengguna.username + " has been created")
       return next();
     })
   })
 
-  {//remote-method cuti_input
+  {//remote-method cuti
     let reg_before, reg_after, bonus_before, bonus_after;
 
-    User.beforeRemote('*.__create__cuti_input', async (context, err) => {
-      const docs = await app.models.saldo_cuti.find({where:{user_id : context.instance.id}});
-      console.log("user: " + docs[0].user_id + "\ncuti_type: " + context.args.data.cuti_type);
+    Pengguna.beforeRemote('*.__create__cuti', async (context, err) => {
+      const docs = await app.models.saldo_cuti.find({where:{id_pengguna : context.instance.id}});
+      console.log("pengguna: " + docs[0].id_pengguna + "\ncuti_type: " + context.args.data.cuti_type);
       
-      let start_date = new Date(context.args.data.start_date.substr(0,4), context.args.data.start_date.substr(5,2) - 1, context.args.data.start_date.substr(8,2))
-      let end_date = new Date(context.args.data.end_date.substr(0,4), context.args.data.end_date.substr(5,2) - 1, context.args.data.end_date.substr(8,2))
-      let lama_cuti = end_date - start_date;
+      let mulai_cuti = new Date(context.args.data.mulai_cuti.substr(0,4), context.args.data.mulai_cuti.substr(5,2) - 1, context.args.data.mulai_cuti.substr(8,2))
+      let selesai_cuti = new Date(context.args.data.selesai_cuti.substr(0,4), context.args.data.selesai_cuti.substr(5,2) - 1, context.args.data.selesai_cuti.substr(8,2))
+      let lama_cuti = selesai_cuti - mulai_cuti;
       lama_cuti = (lama_cuti + 86400000) / 86400000;
 
       const error = {
@@ -135,29 +135,29 @@ module.exports = function(User) {
 
       {
         let x = [docs[0].cuti_reguler, docs[0].cuti_bonus, true, false];
-        if(context.args.data.cuti_type == "reg-first"){
+        if(context.args.data.tipe_cuti == "reg-first"){
           hitung_cuti(x[0],x[1],x[2])
         }else{
           hitung_cuti(x[1],x[0],x[3])
         }
       }
 
-      context.args.data.saldo_cuti_reg_before = reg_before;
-      context.args.data.saldo_cuti_reg_after = reg_after;
-      context.args.data.saldo_cuti_bonus_before = bonus_before;
-      context.args.data.saldo_cuti_bonus_after = bonus_after;
+      context.args.data.saldo_reg_awal = reg_before;
+      context.args.data.saldo_reg_akhir = reg_after;
+      context.args.data.saldo_bonus_awal = bonus_before;
+      context.args.data.saldo_bonus_akhir = bonus_after;
       
       
       console.log(
-        "reg_before : " + context.args.data.saldo_cuti_reg_before +
-        "\nreg_after : " + context.args.data.saldo_cuti_reg_after +
-        "\nbonus_before : " + context.args.data.saldo_cuti_bonus_before +
-        "\nbonus_after : " + context.args.data.saldo_cuti_bonus_after
+        "reg_before : " + context.args.data.saldo_reg_awal +
+        "\nreg_after : " + context.args.data.saldo_reg_akhir +
+        "\nbonus_before : " + context.args.data.saldo_bonus_awal +
+        "\nbonus_after : " + context.args.data.saldo_bonus_akhir
       )
       return;
     })
 
-    User.afterRemote('*.__create__cuti_input', function(context, unused, next){
+    Pengguna.afterRemote('*.__create__cuti', function(context, unused, next){
       app.models.saldo_cuti.update(
         {cuti_reguler : reg_after, cuti_bonus : bonus_after}
       ,function(err){
@@ -168,7 +168,7 @@ module.exports = function(User) {
   }
   
 
-  User.beforeRemote('*.__create__saldo_cuti', function(context, unused, next){
+  Pengguna.beforeRemote('*.__create__saldo_cuti', function(context, unused, next){
     {
       console.log("OK");
       return next();

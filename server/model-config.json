@@ -30,7 +30,7 @@
   "Email": {
     "dataSource": "emailDs"
   },
-  "user": {
+  "pengguna": {
     "dataSource": "mongoDs",
     "public": true,
     "options": {}
@@ -75,10 +75,6 @@
     "public": false
   },
   "profile": {
-    "dataSource": "mongoDs",
-    "public": false
-  },
-  "notif": {
     "dataSource": "mongoDs",
     "public": false
   }

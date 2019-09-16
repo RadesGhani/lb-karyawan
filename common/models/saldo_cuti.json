@@ -7,11 +7,7 @@
       "validateUpsert": true
     },
     "properties": {
-        "user_id": {
-            "type": "string",
-            "required": true
-        },
-        "joining_date": {
+        "tanggal_masuk": {
             "type": "date",
             "required": true
         },
@@ -25,15 +21,15 @@
         },
         "cuti_bonus_exp": {
             "type": "date",
-            "required": "true"
+            "required": true
         }
     },
     "validations": [],
     "relations": {
-      "user": {
+      "pengguna": {
         "type": "belongsTo",
-        "model": "user",
-        "foreignKey": "user_id",
+        "model": "pengguna",
+        "foreignKey": "id_pengguna",
         "options": {
           "nestRemoting": true
         }

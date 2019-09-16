@@ -31,13 +31,13 @@ module.exports = function(Cuti) {
 
     //Function untuk cek POST/PUT/DELETE & cek kadaluarsa
     function isDue(ctx){
-        //console.log(ctx)
+        //console.log(ctx.instance.mulai_cuti)
         if(typeof ctx.isNewInstance != "undefined" || isDelete){
            date = ctx.instance;
         }else{
            date = ctx.currentInstance;
         }
-        //console.log(date)
+        //console.log(date.mulai_cuti)
         Sdate = [date.mulai_cuti.substr(0,4), date.mulai_cuti.substr(5,2) - 1, date.mulai_cuti.substr(8,2)];
         Edate = [date.selesai_cuti.substr(0,4), date.selesai_cuti.substr(5,2) - 1, date.selesai_cuti.substr(8,2)]
         sdate = new Date(Sdate[0], Sdate[1], Sdate[2]);

@@ -13,81 +13,83 @@
   },
   "properties": {
     "tgl_pengajuan":{
-      "type":"date",
-      "required":"true"
+      "type":"string",
+      "required":true
     },
     "mulai_cuti":{
-      "type":"date",
-      "required":"true"
+      "type":"string",
+      "required":true,
+      "format":"date"
     },
     "selesai_cuti":{
-      "type":"date",
-      "required":"true"
+      "type":"string",
+      "required":true,
+      "format":"date"
     },
     "keperluan":{
       "type":"string",
-      "required":"true"
+      "required":true
     },
     "tugas_selesai1":{
       "type":"string",
-      "required":"false"
+      "required":false
     },
     "tugas_selesai2":{
       "type":"string",
-      "required":"false"
+      "required":false
     },
     "tugas_selesai3":{
       "type":"string",
-      "required":"false"
+      "required":false
     },
     "tugas_berjalan1":{
       "type":"string",
-      "required":"true"
+      "required":true
     },
     "tugas_berjalan2":{
       "type":"string",
-      "required":"false"
+      "required":false
     },
     "tugas_berjalan3":{
       "type":"string",
-      "required":"false"
+      "required":false
     },
     "alih_tangan":{
       "type":"string",
-      "required":"true"
+      "required":true
     },
     "tugas_alihan1":{
       "type":"string",
-      "required":"true"
+      "required":true
     },
     "tugas_alihan2":{
       "type":"string",
-      "required":"false"
+      "required":false
     },
     "saldo_reg_awal":{
       "type":"number",
-      "required":"true"
+      "required":true
     },
     "saldo_reg_akhir":{
       "type":"number",
-      "required":"true"
+      "required":true
     },
     "saldo_bonus_awal":{
       "type":"number",
-      "required":"true"
+      "required":true
     },
     "saldo_bonus_akhir":{
       "type":"number",
-      "required":"true"
+      "required":true
     },
     "tipe_cuti":{
       "type":"string",
-      "required":"true"
+      "required":true
     }
   },
   "validations": [],
   "relations": {
-    "user": {
+    "pengguna": {
       "type": "belongsTo",
       "model": "pengguna",
       "foreignKey": "id_pengguna",
