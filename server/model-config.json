@@ -30,14 +30,14 @@
   "Email": {
     "dataSource": "emailDs"
   },
-  "user": {
+  "pengguna": {
     "dataSource": "mongoDs",
     "public": true,
     "options": {}
   },
   "acl": {
     "dataSource": "mongoDs",
-    "public": true,
+    "public": false,
     "options": {}
   },
   "role": {
@@ -52,26 +52,30 @@
   },
   "cuti": {
     "dataSource": "mongoDs",
-    "public": true
+    "public": false
+  },
+  "saldo_cuti": {
+    "dataSource": "mongoDs",
+    "public": false
   },
   "task": {
     "dataSource": "mongoDs",
-    "public": true
+    "public": false
   },
   "kehadiran": {
     "dataSource": "mongoDs",
-    "public": true
+    "public": false
   },
   "team_project": {
     "dataSource": "mongoDs",
-    "public": true
+    "public": false
   },
   "inventaris": {
     "dataSource": "mongoDs",
-    "public": true
+    "public": false
   },
   "profile": {
     "dataSource": "mongoDs",
-    "public": true
+    "public": false
   }
 }

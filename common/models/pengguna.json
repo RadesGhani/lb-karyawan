@@ -1,6 +1,6 @@
 {
-  "name": "user",
-  "plural": "user",
+  "name": "pengguna",
+  "plural": "pengguna",
   "base": "User",
   "idInjection": true,
   "restrictResetPasswordTokenScope": true,
@@ -8,7 +8,7 @@
   "inheritAcls": false,
   "postgresql": {
     "schema": "public",
-    "table": "user"
+    "table": "pengguna"
   },
   "properties": {
     "username": {
@@ -35,15 +35,24 @@
     "cuti": {
       "type": "hasMany",
       "model": "cuti",
-      "foreignKey": "user_id",
+      "foreignKey": "id_pengguna",
       "options": {
         "nestRemoting": true
       }
     },
+    "saldo_cuti": {
+      "type": "hasOne",
+      "model": "saldo_cuti",
+      "foreignKey": "id_pengguna",
+      "options":{
+        "nestRemoting": true
+      },
+      "through": "cuti"
+    },
     "kehadiran": {
       "type": "hasMany",
       "model": "kehadiran",
-      "foreignKey": "user_id",
+      "foreignKey": "id_pengguna",
       "options": {
         "nestRemoting": true
       }
@@ -51,7 +60,7 @@
     "profiles": {
       "type": "hasOne",
       "model": "profile",
-      "foreignKey": "user_Id",
+      "foreignKey": "id_pengguna",
       "options": {
         "nestRemoting": true
       }
@@ -59,7 +68,7 @@
     "salary": {
       "type": "hasOne",
       "model": "salary",
-      "foreignKey": "user_id",
+      "foreignKey": "id_pengguna",
       "options": {
         "nestRemoting": true
       }
@@ -67,7 +76,7 @@
     "profile": {
       "type": "hasOne",
       "model": "profile",
-      "foreignKey": "user_id",
+      "foreignKey": "id_pengguna",
       "options": {
         "nextRemoting" : true
       }
@@ -95,6 +104,7 @@
       "property":[
         "create","deleteById","patchAttributes",
         "__delete__cuti","__create__cuti", "__destroyById__cuti","__updateById__cuti",
+        "__delete__saldo_cuti","__create__saldo_cuti", "__destroyById__saldo_cuti","__updateById__saldo_cuti",
         "__delete__kehadiran","__create__kehadiran", "__destroyById__kehadiran","__updateById__kehadiran","__get__kehadiran",
         "__get__profile","__delete__profile","__create__profile", "__destroyById__profile","__updateById__profile"
       ],
@@ -106,9 +116,10 @@
       "principalId":"admin",
       "property":[
         "create","deleteById","patchAttributes",
-        "__create__cuti", "__destroyById__cuti", "__updateById__cuti",
-        "__get__kehadiran",
-        "__get__profile", "__create__profile", "__destroyById__profile","__updateById__profile"
+        "__delete__cuti","__create__cuti", "__destroyById__cuti","__updateById__cuti",
+        "__destroy__saldo_cuti","__create__saldo_cuti", "__update__saldo_cuti",
+        "__delete__kehadiran","__create__kehadiran", "__destroyById__kehadiran","__updateById__kehadiran","__get__kehadiran",
+        "__get__profile","__delete__profile","__create__profile", "__destroyById__profile","__updateById__profile"
       ],
       "permission":"ALLOW"
     },

@@ -1,6 +1,9 @@
 'use strict';
 
 module.exports = function(Cuti) {
+
+    Cuti.validatesInclusionOf('tipe_cuti', {in: ['reg-first', 'bonus-first']});
+
     let isDelete = false;
     let isDueValid = false;
     let dayMonthValid = false;
@@ -8,51 +11,51 @@ module.exports = function(Cuti) {
     let dataEndDate = false;
     let date, Sdate, Edate, sdate, edate; //instance||currentInstance
     let today = new Date();
+    today.setDate(today.getDate() - 1);today.setHours(23);today.setMinutes(59);today.setSeconds(59);
     const err = {
         statusCode: "400",
         message: "ERROR : waktu cuti telah jatuh tempo."
     };  //err instance
     const S_err = {
         statusCode: "400",
-        message: "ERROR : start_date tidak sesuai."
-    };  //err start_date
+        message: "ERROR : mulai_cuti tidak sesuai."
+    };  //err mulai_cuti
     const E_err = {
         statusCode: "400",
-        message: "ERROR : end_date tidak sesuai."
-    };  //err end_date
+        message: "ERROR : selesai_cuti tidak sesuai."
+    };  //err selesai_cuti
     const SE_err = {
         statusCode: "400",
-        message: "ERROR : start_date dan end_date tidak sinkron."
-    };  //err end_date
+        message: "ERROR : mulai_cuti dan selesai_cuti tidak sinkron."
+    };  //err selesai_cuti
 
     //Function untuk cek POST/PUT/DELETE & cek kadaluarsa
     function isDue(ctx){
-        console.log(ctx)
+        //console.log(ctx.instance.mulai_cuti)
         if(typeof ctx.isNewInstance != "undefined" || isDelete){
            date = ctx.instance;
         }else{
            date = ctx.currentInstance;
         }
-        console.log(date)
-        Sdate = [date.start_date.substr(0,4), date.start_date.substr(5,2) - 1, date.start_date.substr(8,2)];
-        Edate = [date.end_date.substr(0,4), date.end_date.substr(5,2) - 1, date.end_date.substr(8,2)]
+        //console.log(date.mulai_cuti)
+        Sdate = [date.mulai_cuti.substr(0,4), date.mulai_cuti.substr(5,2) - 1, date.mulai_cuti.substr(8,2)];
+        Edate = [date.selesai_cuti.substr(0,4), date.selesai_cuti.substr(5,2) - 1, date.selesai_cuti.substr(8,2)]
         sdate = new Date(Sdate[0], Sdate[1], Sdate[2]);
         edate = new Date(Edate[0], Edate[1], Edate[2]);
-        console.log("instance :\nstart_date = " + sdate + "\nend_date = " + edate);
-        console.log("today : " + today);
+        //console.log("instance :\nmulai_cuti = " + sdate + "\nselesai_cuti = " + edate);
+        //console.log("today : " + today);
 
-        if(sdate > today){
+        if(sdate >= today){
             isDueValid = true;
         }else{
             isDueValid = false;
         }
-
     }
     //END
 
     //Function validasi jumlah tanggal dan bulan
     function dayMonth(day, month, year){
-        console.log("\ndayMonth : " + day + " " + month + " " + year)
+        //console.log("\ndayMonth : " + day + " " + month + " " + year)
         if(day <= 31 && month == 0){
             dayMonthValid = true;
         }else if(day <= 29 && month == 2 && year%4 == 0){
@@ -98,28 +101,27 @@ module.exports = function(Cuti) {
     
     //operation hook validasi tanggal cuti (POST/PUT)
     Cuti.observe('before save', function (ctx, next){
-        console.log(ctx);
-        let xdate, start; //start_date
+        let xdate, start; //mulai_cuti
         let ydate, end; //end-date
         
         isDue(ctx);
-        console.log("\nisDueValid = " + isDueValid)
+        //console.log("\nisDueValid = " + isDueValid)
         if(isDueValid != true){
             return Promise.reject(err);
         }
-        console.log("\ninput value : ")
+        //console.log("\ninput value : ")
         if(typeof ctx.data != "undefined"){
-            if(typeof ctx.data.start_date != "undefined"){
-                xdate = [ctx.data.start_date.substr(0,4), ctx.data.start_date.substr(5,2) - 1, ctx.data.start_date.substr(8,2)];
+            if(typeof ctx.data.mulai_cuti != "undefined"){
+                xdate = [ctx.data.mulai_cuti.substr(0,4), ctx.data.mulai_cuti.substr(5,2) - 1, ctx.data.mulai_cuti.substr(8,2)];
                 start = new Date(xdate[0], xdate[1], xdate[2]);
                 dataStartDate = true;
-                console.log('start : ' + start);
+                //console.log('start : ' + start);
             };
-            if(typeof ctx.data.end_date != "undefined"){
-                ydate = [ctx.data.end_date.substr(0,4), ctx.data.end_date.substr(5,2) - 1, ctx.data.end_date.substr(8,2)];
+            if(typeof ctx.data.selesai_cuti != "undefined"){
+                ydate = [ctx.data.selesai_cuti.substr(0,4), ctx.data.selesai_cuti.substr(5,2) - 1, ctx.data.selesai_cuti.substr(8,2)];
                 end = new Date(ydate[0], ydate[1], ydate[2]);
                 dataEndDate = true;
-                console.log('end : ' + end);
+                //console.log('end : ' + end);
             };
         }
         

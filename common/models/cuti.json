@@ -1,0 +1,103 @@
+{
+  "name": "cuti",
+  "plural": "cuti",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "datePattern": "dd-MM-yyy",
+    "validateUpsert": true
+  },
+  "postgresql": {
+    "schema": "rades",
+    "table": "cuti"
+  },
+  "properties": {
+    "tgl_pengajuan":{
+      "type":"string",
+      "required":true
+    },
+    "mulai_cuti":{
+      "type":"string",
+      "required":true,
+      "format":"date"
+    },
+    "selesai_cuti":{
+      "type":"string",
+      "required":true,
+      "format":"date"
+    },
+    "keperluan":{
+      "type":"string",
+      "required":true
+    },
+    "tugas_selesai1":{
+      "type":"string",
+      "required":false
+    },
+    "tugas_selesai2":{
+      "type":"string",
+      "required":false
+    },
+    "tugas_selesai3":{
+      "type":"string",
+      "required":false
+    },
+    "tugas_berjalan1":{
+      "type":"string",
+      "required":true
+    },
+    "tugas_berjalan2":{
+      "type":"string",
+      "required":false
+    },
+    "tugas_berjalan3":{
+      "type":"string",
+      "required":false
+    },
+    "alih_tangan":{
+      "type":"string",
+      "required":true
+    },
+    "tugas_alihan1":{
+      "type":"string",
+      "required":true
+    },
+    "tugas_alihan2":{
+      "type":"string",
+      "required":false
+    },
+    "saldo_reg_awal":{
+      "type":"number",
+      "required":true
+    },
+    "saldo_reg_akhir":{
+      "type":"number",
+      "required":true
+    },
+    "saldo_bonus_awal":{
+      "type":"number",
+      "required":true
+    },
+    "saldo_bonus_akhir":{
+      "type":"number",
+      "required":true
+    },
+    "tipe_cuti":{
+      "type":"string",
+      "required":true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "pengguna": {
+      "type": "belongsTo",
+      "model": "pengguna",
+      "foreignKey": "id_pengguna",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
