@@ -18,7 +18,7 @@ var frontend = "http://192.168.3.29:3000/reset_pass"; //frontend
 
 module.exports = function(Pengguna) {  
   Pengguna.validatesLengthOf('username', {min: 2}); //username length
-  Pengguna.validatesLengthOf('username', {max: 12}); //username length
+  Pengguna.validatesLengthOf('username', {max: 50}); //username length
   Pengguna.validatesFormatOf('username', {with: /^[A-Za-z\\s]*$/});//username validation(only character type will be accepted)
   //logic untuk mengirim email selamat bergabung
   Pengguna.afterRemote('create', function(context, pengguna, next) {
@@ -94,7 +94,6 @@ module.exports = function(Pengguna) {
     Pengguna.beforeRemote('*.__create__cuti', async (context, err) => {
       const docs = await app.models.saldo_cuti.find({where:{id_pengguna : context.instance.id}});
       console.log("pengguna: " + docs[0].id_pengguna + "\ncuti_type: " + context.args.data.cuti_type);
-      
       let mulai_cuti = new Date(context.args.data.mulai_cuti.substr(0,4), context.args.data.mulai_cuti.substr(5,2) - 1, context.args.data.mulai_cuti.substr(8,2))
       let selesai_cuti = new Date(context.args.data.selesai_cuti.substr(0,4), context.args.data.selesai_cuti.substr(5,2) - 1, context.args.data.selesai_cuti.substr(8,2))
       let lama_cuti = selesai_cuti - mulai_cuti;
@@ -147,6 +146,9 @@ module.exports = function(Pengguna) {
       context.args.data.saldo_bonus_awal = bonus_before;
       context.args.data.saldo_bonus_akhir = bonus_after;
       
+      tgl_pengajuan = new Date;
+      context.args.data.tgl_pengajuan = tgl_pengajuan.toLocaleString();
+      console.log(context.args.data.tgl_pengajuan);
       
       console.log(
         "reg_before : " + context.args.data.saldo_reg_awal +

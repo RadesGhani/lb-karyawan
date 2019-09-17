@@ -70,10 +70,6 @@
     "dataSource": "postgresDs",
     "public": false
   },
-  "user_team": {
-    "dataSource": "postgresDs",
-    "public": false
-  },
   "inventaris": {
     "dataSource": "postgresDs",
     "public": false

@@ -34,7 +34,7 @@
   },
   "validations": [],
   "relations": {
-    "cuti_input": {
+    "cuti": {
       "type": "hasMany",
       "model": "cuti",
       "foreignKey": "id_pengguna",
@@ -46,7 +46,7 @@
       "type": "hasOne",
       "model": "saldo_cuti",
       "foreignKey": "id_pengguna",
-      "options":{
+      "options": {
         "nestRemoting": true
       },
       "through": "cuti"
@@ -62,7 +62,7 @@
     "tim": {
       "type": "belongsTo",
       "model": "tim",
-      "foreignKey": "team_name_id",
+      "foreignKey": "nama_tim",
       "options": {
         "nestRemoting": true
       }
@@ -94,54 +94,100 @@
   },
   "acls": [
     {
-      "accessType":"READ",
-      "principalType":"ROLE",
-      "principalId":"$everyone",
-      "property":"*",
-      "permission":"ALLOW"
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "*"
     },
     {
-      "accessType":"READ",
-      "principalType":"ROLE",
-      "principalId":"$authenticated",
-      "property":"*",
-      "permission":"ALLOW"
-    },
-    {"accessType":"EXECUTE",
-      "principalType":"ROLE",
-      "principalId":"$everyone",
-      "property":[
-        "create","deleteById","patchAttributes",
-        "__delete__cuti","__create__cuti", "__destroyById__cuti","__updateById__cuti",
-        "__delete__saldo_cuti","__create__saldo_cuti", "__destroyById__saldo_cuti","__updateById__saldo_cuti",
-        "__delete__kehadiran","__create__kehadiran", "__destroyById__kehadiran","__updateById__kehadiran","__get__kehadiran",
-        "__get__profil","__delete__profil","__create__profil", "__destroyById__profil","__updateById__profil", "__create__team_project__task", "__get__team_project", "__get__task"
-      ],
-      "permission":"ALLOW"
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "*"
     },
     {
-      "accessType":"EXECUTE",
-      "principalType":"ROLE",
-      "principalId":"admin",
-      "property":[
-        "create","deleteById","patchAttributes",
-        "__delete__cuti","__create__cuti", "__destroyById__cuti","__updateById__cuti",
-        "__destroy__saldo_cuti","__create__saldo_cuti", "__update__saldo_cuti",
-        "__delete__kehadiran","__create__kehadiran", "__destroyById__kehadiran","__updateById__kehadiran","__get__kehadiran",
-        "__get__profil", "__create__profil", "__destroy__profil","__updateById__profil", "__create__team_project__task", "__get__team_project", "__get__task", "__create__task"
-      ],
-      "permission":"ALLOW"
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": [
+        "create",
+        "deleteById",
+        "patchAttributes",
+        "__delete__cuti",
+        "__create__cuti",
+        "__destroyById__cuti",
+        "__updateById__cuti",
+        "__delete__saldo_cuti",
+        "__create__saldo_cuti",
+        "__destroyById__saldo_cuti",
+        "__updateById__saldo_cuti",
+        "__delete__kehadiran",
+        "__create__kehadiran",
+        "__destroyById__kehadiran",
+        "__updateById__kehadiran",
+        "__get__kehadiran",
+        "__get__profil",
+        "__delete__profil",
+        "__create__profil",
+        "__destroyById__profil",
+        "__updateById__profil",
+        "__create__team_project__task",
+        "__get__team_project",
+        "__get__task"
+      ]
     },
     {
-      "accessType":"EXECUTE",
-      "principalType":"ROLE",
-      "principalId":"$owner",
-      "property":[
-        "__create__cuti", "__destroyById__cuti","__updateById__cuti",
-        "__create__kehadiran", "__get__kehadiran",
-        "__get__profil", "__create__profil", "__updateById__profil", "__find__profil", "__get__team_project", "__get__task"
-      ],
-      "permission":"ALLOW"
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": [
+        "create",
+        "deleteById",
+        "patchAttributes",
+        "__delete__cuti",
+        "__create__cuti",
+        "__destroyById__cuti",
+        "__updateById__cuti",
+        "__destroy__saldo_cuti",
+        "__create__saldo_cuti",
+        "__update__saldo_cuti",
+        "__delete__kehadiran",
+        "__create__kehadiran",
+        "__destroyById__kehadiran",
+        "__updateById__kehadiran",
+        "__get__kehadiran",
+        "__get__profil",
+        "__create__profil",
+        "__destroy__profil",
+        "__updateById__profil",
+        "__create__team_project__task",
+        "__get__team_project",
+        "__get__task",
+        "__create__task"
+      ]
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": [
+        "__create__cuti",
+        "__destroyById__cuti",
+        "__updateById__cuti",
+        "__create__kehadiran",
+        "__get__kehadiran",
+        "__get__profil",
+        "__create__profil",
+        "__updateById__profil",
+        "__find__profil",
+        "__get__team_project",
+        "__get__task"
+      ]
     }
   ],
   "methods": {}

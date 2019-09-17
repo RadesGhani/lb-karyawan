@@ -1,48 +1,47 @@
 {
-    "name": "gaji",
-    "plural": "gaji",
-    "base": "PersistedModel",
-    "idInjection": true,
-    "options": {
-      "validateUpsert": true
+  "name": "gaji",
+  "plural": "gaji",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "postgresql": {
+    "schema": "public",
+    "table": "gaji"
+  },
+  "properties": {
+    "id_pengguna": {
+      "type": "number",
+      "required": true
     },
-    "postgresql": {
-      "schema": "public",
-      "table": "gaji"
+    "gaji": {
+      "type": "number",
+      "required": true
     },
-    "properties": {
-      "id_pengguna": {
-        "type": "number",
-        "required": true
-      },
-      "gaji": {
-        "type": "number",
-        "required": true
-      },
-      "bonus": {
-        "type": "number",
-        "required": true
-      },
-      "total": {
-        "type": "number",
-        "required": true
-      },
-      "posisi_pegawai": {
-        "type": "string"
+    "bonus": {
+      "type": "number",
+      "required": true
+    },
+    "total": {
+      "type": "number",
+      "required": true
+    },
+    "posisi_pegawai": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "user_id",
+      "options": {
+        "nestRemoting": true
       }
-    },
-    "validations": [],
-    "relations": {
-      "user": {
-        "type": "belongsTo",
-        "model": "user",
-        "foreignKey": "user_id",
-        "options": {
-          "nestRemoting": true
-        }
-      }
-    },
-    "acls": [],
-    "methods": {}
-  }
-  
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

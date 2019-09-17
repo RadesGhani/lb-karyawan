@@ -22,12 +22,12 @@
     "pengguna": {
       "type": "hasMany",
       "model": "pengguna",
-      "foreignKey": "team_name_id",
+      "foreignKey": "nama_tim",
       "options": {
         "nestRemoting": true
       }
     },
-     "tugas": {
+    "tugas": {
       "type": "hasMany",
       "model": "tugas",
       "foreignKey": "nama_tim",
