@@ -6,7 +6,7 @@
 module.exports = function(Tugas) {
   Tugas.observe('access', function limitToTenant(ctx, next) {
     var authorizedRoles = ctx.options.authorizedRoles;
-    var storeId = ctx.options.currentUser.team_name_id;
+    var storeId = ctx.options.currentUser.nama_tim;
 
     if (!authorizedRoles.admin) {
       ctx.query.where = ctx.query.where || {};
@@ -35,7 +35,7 @@ module.exports = function(Tugas) {
   });
       // only admin in each team_project who can only create task team_project in group that they own as admin
   Tugas.observe('before save', function(ctx, next) {
-    var teamId = ctx.options.currentUser.team_name_id;
+    var teamId = ctx.options.currentUser.nama_tim;
     if (ctx.instance && ctx.instance.nama_tim) {
       if (ctx.instance.nama_tim != teamId) {
         var err = {

@@ -60,7 +60,7 @@
   },
   "tugas": {
     "dataSource": "postgresDs",
-    "public": false
+    "public": true
   },
   "kehadiran": {
     "dataSource": "postgresDs",
