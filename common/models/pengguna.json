@@ -134,9 +134,9 @@
         "__create__profil",
         "__destroyById__profil",
         "__updateById__profil",
-        "__create__team_project__task",
-        "__get__team_project",
-        "__get__task"
+        "__create__tim__tugas",
+        "__get__tim",
+        "__get__tugas"
       ]
     },
     {
@@ -164,10 +164,10 @@
         "__create__profil",
         "__destroy__profil",
         "__updateById__profil",
-        "__create__team_project__task",
-        "__get__team_project",
-        "__get__task",
-        "__create__task"
+        "__create__tim__tugas",
+        "__get__tim",
+        "__get__tugas",
+        "__create__tugas"
       ]
     },
     {
@@ -185,8 +185,8 @@
         "__create__profil",
         "__updateById__profil",
         "__find__profil",
-        "__get__team_project",
-        "__get__task"
+        "__get__tim",
+        "__get__tugas"
       ]
     }
   ],
