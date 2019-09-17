@@ -1,40 +1,36 @@
 {
-  "name": "team_project",
-  "plural": "team_project",
+  "name": "tim",
+  "plural": "tim",
   "base": "PersistedModel",
-  "idInjection": true,
+  "idInjection": false,
   "options": {
     "validateUpsert": true
   },
   "postgresql": {
-    "schema": "rades",
-    "table": "team_project"
+    "schema": "public",
+    "table": "tim"
   },
-
   "properties": {
-    "id": {
-      "type": "number",
-      "required": false
-    },
-    "name_team": {
+    "nama_tim": {
       "type": "string",
+      "id": true,
       "required": true
     }
   },
   "validations": [],
   "relations": {
-    "user": {
+    "pengguna": {
       "type": "hasMany",
-      "model": "user",
-      "foreignKey": "team_project",
+      "model": "pengguna",
+      "foreignKey": "team_name_id",
       "options": {
         "nestRemoting": true
       }
     },
-    "task": {
+     "tugas": {
       "type": "hasMany",
-      "model": "task",
-      "foreignKey": "team_project",
+      "model": "tugas",
+      "foreignKey": "nama_tim",
       "options": {
         "nestRemoting": true
       }

@@ -1,0 +1,67 @@
+{
+    "name": "pinjaman",
+    "plural": "pinjaman",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+      "validateUpsert": true
+    },
+    "postgresql": {
+      "schema": "public",
+      "table": "pinjaman"
+    },
+    "properties": {
+      "id_pengguna": {
+        "type": "string",
+        "required": true
+      },
+      "tim": {
+        "type": "string",
+        "required": true
+      },
+      "nama_barang": {
+        "type": "string",
+        "required": true
+      },
+      "tgl_mulai": {
+        "type": "string",
+        "required": true,
+        "format": "date"
+      },
+      "tgl_berakhir": {
+        "type": "string",
+        "required": true,
+        "format": "date"
+      },
+      "jumlah": {
+        "type": "number",
+        "required": true
+      },
+      "deskripsi": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "validations": [],
+    "relations": {
+      "user": {
+        "type": "belongsTo",
+          "model": "user",
+          "foreignKey": "id_pengguna",
+          "options": {
+            "nestRemoting": true
+          }
+        },
+        "inventaris": {
+          "type": "belongsTo",
+          "model": "inventaris",
+          "foreignKey": "nama_barang",
+          "options": {
+            "nestRemoting": true
+          }
+      }
+  },
+    "acls": [],
+    "methods": {}
+  }
+  

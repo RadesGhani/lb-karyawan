@@ -5,7 +5,6 @@
   "idInjection": true,
   "restrictResetPasswordTokenScope": true,
   "emailVerificationRequired": false,
-  "inheritAcls": false,
   "postgresql": {
     "schema": "public",
     "table": "pengguna"
@@ -14,7 +13,7 @@
     "username": {
       "type": "String",
       "required": true,
-      "max": 8,
+      "max": 50,
       "min": 2
     },
     "email": {
@@ -23,16 +22,19 @@
     },
     "password": {
       "type": "String",
-      "default": "ayaya",
       "required": true,
       "max": 50,
       "min": 8,
-      "pattern": "(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])^.*$"
+      "pattern": "(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])^.*$",
+      "default": "ayaya"
+    },
+    "role": {
+      "type": "string"
     }
   },
   "validations": [],
   "relations": {
-    "cuti": {
+    "cuti_input": {
       "type": "hasMany",
       "model": "cuti",
       "foreignKey": "id_pengguna",
@@ -57,28 +59,36 @@
         "nestRemoting": true
       }
     },
-    "profiles": {
+    "tim": {
+      "type": "belongsTo",
+      "model": "tim",
+      "foreignKey": "team_name_id",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "profil": {
       "type": "hasOne",
-      "model": "profile",
+      "model": "profil",
       "foreignKey": "id_pengguna",
       "options": {
         "nestRemoting": true
       }
     },
-    "salary": {
+    "gaji": {
       "type": "hasOne",
-      "model": "salary",
+      "model": "gaji      ",
       "foreignKey": "id_pengguna",
       "options": {
         "nestRemoting": true
       }
     },
-    "profile": {
-      "type": "hasOne",
-      "model": "profile",
+    "pinjaman": {
+      "type": "hasMany",
+      "model": "pinjaman",
       "foreignKey": "id_pengguna",
       "options": {
-        "nextRemoting" : true
+        "nestRemoting": true
       }
     }
   },
@@ -88,7 +98,7 @@
       "principalType":"ROLE",
       "principalId":"$everyone",
       "property":"*",
-      "permission":"DENY"
+      "permission":"ALLOW"
     },
     {
       "accessType":"READ",
@@ -97,8 +107,7 @@
       "property":"*",
       "permission":"ALLOW"
     },
-    {
-      "accessType":"EXECUTE",
+    {"accessType":"EXECUTE",
       "principalType":"ROLE",
       "principalId":"$everyone",
       "property":[
@@ -106,9 +115,9 @@
         "__delete__cuti","__create__cuti", "__destroyById__cuti","__updateById__cuti",
         "__delete__saldo_cuti","__create__saldo_cuti", "__destroyById__saldo_cuti","__updateById__saldo_cuti",
         "__delete__kehadiran","__create__kehadiran", "__destroyById__kehadiran","__updateById__kehadiran","__get__kehadiran",
-        "__get__profile","__delete__profile","__create__profile", "__destroyById__profile","__updateById__profile"
+        "__get__profil","__delete__profil","__create__profil", "__destroyById__profil","__updateById__profil", "__create__team_project__task", "__get__team_project", "__get__task"
       ],
-      "permission":"DENY"
+      "permission":"ALLOW"
     },
     {
       "accessType":"EXECUTE",
@@ -119,7 +128,7 @@
         "__delete__cuti","__create__cuti", "__destroyById__cuti","__updateById__cuti",
         "__destroy__saldo_cuti","__create__saldo_cuti", "__update__saldo_cuti",
         "__delete__kehadiran","__create__kehadiran", "__destroyById__kehadiran","__updateById__kehadiran","__get__kehadiran",
-        "__get__profile","__delete__profile","__create__profile", "__destroyById__profile","__updateById__profile"
+        "__get__profil", "__create__profil", "__destroy__profil","__updateById__profil", "__create__team_project__task", "__get__team_project", "__get__task", "__create__task"
       ],
       "permission":"ALLOW"
     },
@@ -130,11 +139,10 @@
       "property":[
         "__create__cuti", "__destroyById__cuti","__updateById__cuti",
         "__create__kehadiran", "__get__kehadiran",
-        "__get__profile", "__create__profile", "__updateById__profile"
+        "__get__profil", "__create__profil", "__updateById__profil", "__find__profil", "__get__team_project", "__get__task"
       ],
       "permission":"ALLOW"
     }
-
   ],
   "methods": {}
 }

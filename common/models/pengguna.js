@@ -18,7 +18,7 @@ var frontend = "http://192.168.3.29:3000/reset_pass"; //frontend
 
 module.exports = function(Pengguna) {  
   Pengguna.validatesLengthOf('username', {min: 2}); //username length
-  Pengguna.validatesLengthOf('username', {max: 8}); //username length
+  Pengguna.validatesLengthOf('username', {max: 12}); //username length
   Pengguna.validatesFormatOf('username', {with: /^[A-Za-z\\s]*$/});//username validation(only character type will be accepted)
   //logic untuk mengirim email selamat bergabung
   Pengguna.afterRemote('create', function(context, pengguna, next) {

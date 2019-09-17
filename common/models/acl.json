@@ -2,7 +2,7 @@
   "name": "acl",
   "base": "ACL",
   "postgresql": {
-    "schema": "rades",
+    "schema": "rexa",
     "table": "acl"
   },
   "properties": {},

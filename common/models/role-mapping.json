@@ -3,10 +3,9 @@
   "plural": "roleMapping",
   "base": "RoleMapping",
   "postgresql": {
-    "schema": "rades",
+    "schema": "public",
     "table": "rolemapping"
   },
-
   "properties": {},
   "validations": [],
   "relations": {},
@@ -15,14 +14,14 @@
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "DENY"
-  },
-  {
+      "permission": "ALLOW"
+    },
+    {
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "admin",
       "permission": "ALLOW"
-  }
-],
+    }
+  ],
   "methods": {}
 }
