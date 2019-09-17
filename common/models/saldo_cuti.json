@@ -1,0 +1,44 @@
+{
+  "name": "saldo_cuti",
+  "plural": "saldo_cuti",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "postgresql": {
+    "schema": "public",
+    "table": "saldo_cuti"
+  },
+  "properties": {
+    "tanggal_masuk": {
+      "type": "date",
+      "required": true
+    },
+    "cuti_reguler": {
+      "type": "number",
+      "required": true
+    },
+    "cuti_bonus": {
+      "type": "number",
+      "required": true
+    },
+    "cuti_bonus_exp": {
+      "type": "date",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "pengguna": {
+      "type": "belongsTo",
+      "model": "pengguna",
+      "foreignKey": "id_pengguna",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

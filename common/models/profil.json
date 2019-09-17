@@ -177,7 +177,7 @@
     },
     "masa_berlaku": {
       "type": "string",
-      "format":"date"
+      "format": "date"
     },
     "alamat_ktp": {
       "type": "string"

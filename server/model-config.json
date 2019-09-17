@@ -13,7 +13,7 @@
   },
   "AccessToken": {
     "dataSource": "postgresDs",
-    "public": true
+    "public": false
   },
   "ACL": {
     "dataSource": "postgresDs",
@@ -21,11 +21,11 @@
   },
   "RoleMapping": {
     "dataSource": "postgresDs",
-    "public": true
+    "public": false
   },
   "Role": {
     "dataSource": "postgresDs",
-    "public": true
+    "public": false
   },
   "Email": {
     "dataSource": "emailDs"
@@ -47,16 +47,20 @@
   },
   "roleMapping": {
     "dataSource": "postgresDs",
-    "public": false,
+    "public": true,
     "options": {}
   },
   "cuti": {
     "dataSource": "postgresDs",
     "public": false
   },
+  "saldo_cuti": {
+    "dataSource": "postgresDs",
+    "public": false
+  },
   "tugas": {
     "dataSource": "postgresDs",
-    "public": true
+    "public": false
   },
   "kehadiran": {
     "dataSource": "postgresDs",
@@ -64,7 +68,7 @@
   },
   "tim": {
     "dataSource": "postgresDs",
-    "public": true
+    "public": false
   },
   "user_team": {
     "dataSource": "postgresDs",
@@ -72,11 +76,11 @@
   },
   "inventaris": {
     "dataSource": "postgresDs",
-    "public": true
+    "public": false
   },
   "profil": {
     "dataSource": "postgresDs",
-    "public": true
+    "public": false
   },
   "gaji": {
     "dataSource": "postgresDs",
@@ -84,6 +88,6 @@
   },
   "pinjaman": {
     "dataSource": "postgresDs",
-    "public": true
+    "public": false
   }
 }
