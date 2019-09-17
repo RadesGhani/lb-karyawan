@@ -56,11 +56,11 @@
   },
   "saldo_cuti": {
     "dataSource": "postgresDs",
-    "public": false
+    "public": true
   },
   "tugas": {
     "dataSource": "postgresDs",
-    "public": true
+    "public": false
   },
   "kehadiran": {
     "dataSource": "postgresDs",

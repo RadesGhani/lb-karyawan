@@ -89,7 +89,7 @@ module.exports = function(Pengguna) {
   })
 
   {//remote-method cuti
-    let reg_before, reg_after, bonus_before, bonus_after;
+    let reg_before, reg_after, bonus_before, bonus_after, penggunaid, tgl_masuk_after, exp_after, id_after;
 
     Pengguna.beforeRemote('*.__create__cuti', async (context, err) => {
       const docs = await app.models.saldo_cuti.find({where:{id_pengguna : context.instance.id}});
@@ -106,6 +106,11 @@ module.exports = function(Pengguna) {
       
       reg_before = docs[0].cuti_reguler;reg_after = docs[0].cuti_reguler;
       bonus_before = docs[0].cuti_bonus;bonus_after = docs[0].cuti_bonus;
+      penggunaid = context.instance.id;
+      tgl_masuk_after = docs[0].id_pengguna;
+      exp_after = docs[0].cuti_bonus_exp;
+      id_after = docs[0].id;
+      tgl_masuk_after = docs[0].tanggal_masuk;
 
       function hitung_cuti(g,h,i){
         let x = g - lama_cuti;
@@ -145,7 +150,7 @@ module.exports = function(Pengguna) {
       context.args.data.saldo_reg_akhir = reg_after;
       context.args.data.saldo_bonus_awal = bonus_before;
       context.args.data.saldo_bonus_akhir = bonus_after;
-      
+    
       tgl_pengajuan = new Date;
       context.args.data.tgl_pengajuan = tgl_pengajuan.toLocaleString();
       console.log(context.args.data.tgl_pengajuan);
@@ -160,8 +165,8 @@ module.exports = function(Pengguna) {
     })
 
     Pengguna.afterRemote('*.__create__cuti', function(context, unused, next){
-      app.models.saldo_cuti.update(
-        {cuti_reguler : reg_after, cuti_bonus : bonus_after}
+      console.log(id_after);
+      app.models.saldo_cuti.replaceById(id_after, {id : id_after, id_pengguna : penggunaid, cuti_reguler : reg_after, cuti_bonus : bonus_after, cuti_bonus_exp : exp_after, tanggal_masuk : tgl_masuk_after}
       ,function(err){
         if (err) throw (err);
         return next();
