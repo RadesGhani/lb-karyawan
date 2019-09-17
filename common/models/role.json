@@ -4,10 +4,9 @@
   "base": "Role",
   "idInjection": true,
   "postgresql": {
-    "schema": "rades",
+    "schema": "public",
     "table": "role"
   },
-
   "properties": {},
   "validations": [],
   "relations": {},
@@ -16,14 +15,14 @@
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "DENY"
-  },
-  {
+      "permission": "ALLOW"
+    },
+    {
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "admin",
       "permission": "ALLOW"
-  }
-    ],
+    }
+  ],
   "methods": {}
 }

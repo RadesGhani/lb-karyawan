@@ -8,7 +8,7 @@
     "validateUpsert": true
   },
   "postgresql": {
-    "schema": "rades",
+    "schema": "public",
     "table": "cuti"
   },
   "properties": {
@@ -35,10 +35,6 @@
       "required":false
     },
     "tugas_selesai2":{
-      "type":"string",
-      "required":false
-    },
-    "tugas_selesai3":{
       "type":"string",
       "required":false
     },

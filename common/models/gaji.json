@@ -1,6 +1,6 @@
 {
-  "name": "saldo_cuti",
-  "plural": "saldo_cuti",
+  "name": "gaji",
+  "plural": "gaji",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -8,32 +8,35 @@
   },
   "postgresql": {
     "schema": "public",
-    "table": "saldo_cuti"
+    "table": "gaji"
   },
   "properties": {
-    "tanggal_masuk": {
-      "type": "date",
-      "required": true
-    },
-    "cuti_reguler": {
+    "id_pengguna": {
       "type": "number",
       "required": true
     },
-    "cuti_bonus": {
+    "gaji": {
       "type": "number",
       "required": true
     },
-    "cuti_bonus_exp": {
-      "type": "date",
+    "bonus": {
+      "type": "number",
       "required": true
+    },
+    "total": {
+      "type": "number",
+      "required": true
+    },
+    "posisi_pegawai": {
+      "type": "string"
     }
   },
   "validations": [],
   "relations": {
-    "pengguna": {
+    "user": {
       "type": "belongsTo",
-      "model": "pengguna",
-      "foreignKey": "id_pengguna",
+      "model": "user",
+      "foreignKey": "user_id",
       "options": {
         "nestRemoting": true
       }

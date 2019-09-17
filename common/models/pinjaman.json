@@ -1,44 +1,45 @@
 {
-  "name": "task",
-  "plural": "task",
+  "name": "pinjaman",
+  "plural": "pinjaman",
   "base": "PersistedModel",
   "idInjection": true,
-  
   "options": {
     "validateUpsert": true
   },
   "postgresql": {
-    "schema": "rades",
-    "table": "task"
+    "schema": "public",
+    "table": "pinjaman"
   },
   "properties": {
-    "team_project": {
-      "type": "number",
-      "required": true
-    },
-    "user_id": {
-      "type": "string",
-      "required": false
-    }, 
-    "task": {
+    "id_pengguna": {
       "type": "string",
       "required": true
     },
-    "date": {
+    "tim": {
+      "type": "string",
+      "required": true
+    },
+    "nama_barang": {
+      "type": "string",
+      "required": true
+    },
+    "tgl_mulai": {
       "type": "string",
       "required": true,
       "format": "date"
     },
-    "name_project": {
-      "type": "string",
-      "required": true
-    },
-    "status": {
+    "tgl_berakhir": {
       "type": "string",
       "required": true,
-      "enum": [
-        "unchecked", "checked"
-      ]
+      "format": "date"
+    },
+    "jumlah": {
+      "type": "number",
+      "required": true
+    },
+    "deskripsi": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
@@ -46,21 +47,20 @@
     "user": {
       "type": "belongsTo",
       "model": "user",
-      "foreignKey": "user_id",
+      "foreignKey": "id_pengguna",
       "options": {
         "nestRemoting": true
       }
     },
-    "divisi": {
+    "inventaris": {
       "type": "belongsTo",
-      "model": "team_project",
-      "foreignKey": "team_project",
+      "model": "inventaris",
+      "foreignKey": "nama_barang",
       "options": {
         "nestRemoting": true
       }
     }
   },
-  "acls": [
-  ],
+  "acls": [],
   "methods": {}
 }
