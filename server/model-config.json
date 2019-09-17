@@ -58,7 +58,7 @@
     "dataSource": "mongoDs",
     "public": false
   },
-  "task": {
+  "tugas": {
     "dataSource": "mongoDs",
     "public": false
   },
@@ -66,7 +66,7 @@
     "dataSource": "mongoDs",
     "public": false
   },
-  "team_project": {
+  "tim": {
     "dataSource": "mongoDs",
     "public": false
   },
@@ -74,7 +74,15 @@
     "dataSource": "mongoDs",
     "public": false
   },
-  "profile": {
+  "profil": {
+    "dataSource": "mongoDs",
+    "public": false
+  },
+  "gaji": {
+    "dataSource": "mongoDs",
+    "public": false
+  },
+  "pinjaman": {
     "dataSource": "mongoDs",
     "public": false
   }
