@@ -4,6 +4,7 @@
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
+    "datePattern": "dd-MM-yyy",
     "validateUpsert": true
   },
   "postgresql": {
@@ -25,17 +26,10 @@
       "format": "date"
     },
     "waktu_masuk": {
-      "type": "date",
-      "required": true,
-      "dataType": "timestamp",
-      "defaultFn": "$now"
+      "type": "string",
+      "required": false
     },
     "waktu_keluar": {
-      "type": "string",
-      "required": true,
-      "format": "time"
-    },
-    "shift": {
       "type": "string",
       "required": false
     }
