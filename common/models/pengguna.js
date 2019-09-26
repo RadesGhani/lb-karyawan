@@ -7,7 +7,7 @@ var config = require('../../server/config.json');
 var path = require('path');
 var g = require('loopback/lib/globalize');
 
-const app = require('../../server/server');
+var app = require('../../server/server');
 
 //Replace this address with your actual address
 var senderAddress = 'noreply@loopback.com'; 

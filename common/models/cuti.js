@@ -1,5 +1,7 @@
 'use strict';
 
+var app = require('../../server/server');
+
 module.exports = function(Cuti) {
 
     Cuti.validatesInclusionOf('tipe_cuti', {in: ['reg-first', 'bonus-first']});
@@ -31,13 +33,11 @@ module.exports = function(Cuti) {
 
     //Function untuk cek POST/PUT/DELETE & cek kadaluarsa
     function isDue(ctx){
-        //console.log(ctx.instance.mulai_cuti)
-        if(typeof ctx.isNewInstance != "undefined" || isDelete){
+        if(typeof ctx.isNewInstance != "undefined" || isDelete == true){
            date = ctx.instance;
         }else{
            date = ctx.currentInstance;
         }
-        //console.log(date.mulai_cuti)
         Sdate = [date.mulai_cuti.substr(0,4), date.mulai_cuti.substr(5,2) - 1, date.mulai_cuti.substr(8,2)];
         Edate = [date.selesai_cuti.substr(0,4), date.selesai_cuti.substr(5,2) - 1, date.selesai_cuti.substr(8,2)]
         sdate = new Date(Sdate[0], Sdate[1], Sdate[2]);
@@ -86,17 +86,6 @@ module.exports = function(Cuti) {
             dayMonthValid = false
         }
     }
-    //END
-
-    //operation hook validasi tanggal cuti (DELETE)
-    Cuti.observe('before delete', function (ctx, next){
-        isDelete = true;
-        if(isDueValid != true){
-            return Promise.reject(err);
-        }else{
-            return next();
-        }
-    })
     //END
     
     //operation hook validasi tanggal cuti (POST/PUT)
@@ -173,4 +162,37 @@ module.exports = function(Cuti) {
         };
     })
     //END
+
+    //Refund saldo cuti ketika membatalkan cuti
+    Cuti.observe('before delete',async (context, err) =>{
+        isDelete = true;
+        isDue(context);
+        console.log(isDueValid);
+        if(isDueValid != true){
+            throw (err);
+        }
+        console.log(context.instance);
+        console.log(context.instance.id_pengguna)
+        const docs = await app.models.saldo_cuti.find({where:{id_pengguna : context.instance.id_pengguna}});
+        console.log(docs)
+
+        app.models.saldo_cuti.replaceById(docs[0].id, {
+            id : docs[0].id, id_pengguna : docs[0].id_pengguna, cuti_reguler : context.instance.saldo_reg_awal, 
+            cuti_bonus : context.instance.saldo_bonus_awal, cuti_bonus_exp : docs[0].cuti_bonus_exp, tanggal_masuk : docs[0].tanggal_masuk}
+            ,function(err){
+              if (err){
+                throw (err);
+              } 
+              return;
+        })
+    })
+
+    /*app.models.saldo_cuti.replaceById(id_after, {id : id_after, id_pengguna : penggunaid, cuti_reguler : reg_after, cuti_bonus : bonus_after, cuti_bonus_exp : exp_after, tanggal_masuk : tgl_masuk_after}
+        ,function(err){
+          if (err){
+            app.models.cuti.destroyById(id_cuti)
+            throw (err);
+          } 
+          return next();
+    })*/
 };

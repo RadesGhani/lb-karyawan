@@ -8,82 +8,82 @@
     ]
   },
   "User": {
-    "dataSource": "postgresDs",
+    "dataSource": "mongoDs",
     "public": false
   },
   "AccessToken": {
-    "dataSource": "postgresDs",
+    "dataSource": "mongoDs",
     "public": false
   },
   "ACL": {
-    "dataSource": "postgresDs",
+    "dataSource": "mongoDs",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "postgresDs",
+    "dataSource": "mongoDs",
     "public": false
   },
   "Role": {
-    "dataSource": "postgresDs",
+    "dataSource": "mongoDs",
     "public": false
   },
   "Email": {
     "dataSource": "emailDs"
   },
   "pengguna": {
-    "dataSource": "postgresDs",
+    "dataSource": "mongoDs",
     "public": true,
     "options": {}
   },
   "acl": {
-    "dataSource": "postgresDs",
+    "dataSource": "mongoDs",
     "public": false,
     "options": {}
   },
   "role": {
-    "dataSource": "postgresDs",
+    "dataSource": "mongoDs",
     "public": false,
     "options": {}
   },
   "roleMapping": {
-    "dataSource": "postgresDs",
+    "dataSource": "mongoDs",
     "public": true,
     "options": {}
   },
   "cuti": {
-    "dataSource": "postgresDs",
+    "dataSource": "mongoDs",
     "public": false
   },
   "saldo_cuti": {
-    "dataSource": "postgresDs",
-    "public": true
+    "dataSource": "mongoDs",
+    "public": false
   },
   "tugas": {
-    "dataSource": "postgresDs",
+    "dataSource": "mongoDs",
     "public": false
   },
   "kehadiran": {
-    "dataSource": "postgresDs",
-    "public": false
+    "dataSource": "mongoDs",
+    "public": true
   },
   "tim": {
-    "dataSource": "postgresDs",
+    "dataSource": "mongoDs",
     "public": false
   },
   "inventaris": {
-    "dataSource": "postgresDs",
+    "dataSource": "mongoDs",
     "public": false
   },
   "profil": {
-    "dataSource": "postgresDs",
+    "dataSource": "mongoDs",
     "public": false
   },
   "gaji": {
-    "dataSource": "postgresDs",
+    "dataSource": "mongoDs",
     "public": false
   },
   "pinjaman": {
-    "dataSource": "postgresDs",
+    "dataSource": "mongoDs",
     "public": false
   }
 }

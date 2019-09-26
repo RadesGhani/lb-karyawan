@@ -81,6 +81,16 @@
     "tipe_cuti":{
       "type":"string",
       "required":true
+    },
+    "ttd_ketua":{
+      "type":"boolean",
+      "required":false,
+      "default":null
+    },
+    "ttd_hrd":{
+      "type":"boolean",
+      "required":false,
+      "default":null
     }
   },
   "validations": [],
