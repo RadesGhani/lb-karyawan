@@ -9,10 +9,10 @@ var g = require('loopback/lib/globalize');
 
 //Replace this address with your actual address
 var senderAddress = 'noreply@loopback.com'; 
-var frontend = "https://192.168.0.40:3000/reset_pass"; //frontend
+var frontend = "http://192.168.3.157:3000/reset_pass"; //frontend
 
 //link website
-var frontend = "http://192.168.3.29:3000/reset_pass"; //frontend
+var frontend = "http://192.168.3.157:3000/reset_pass"; //frontend
 
 module.exports = function(User) {  
   User.validatesLengthOf('username', {min: 2}); //username length

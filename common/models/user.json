@@ -96,7 +96,8 @@
         "create","deleteById","patchAttributes",
         "__delete__cuti","__create__cuti", "__destroyById__cuti","__updateById__cuti",
         "__delete__kehadiran","__create__kehadiran", "__destroyById__kehadiran","__updateById__kehadiran","__get__kehadiran",
-        "__delete__profile","__create__profile", "__destroyById__profile","__updateById__profile"
+        "__delete__profile","__create__profile", "__destroyById__profile","__updateById__profile",
+        "__get__salary", "__update__salary", "__create__salary", "__destroy__salary", "__get__salary__user"
       ],
       "permission":"DENY"
     },
@@ -120,6 +121,15 @@
         "__create__cuti", "__destroyById__cuti","__updateById__cuti",
         "__create__kehadiran", "__get__kehadiran",
         "__delete__profile","__create__profile", "__destroyById__profile","__updateById__profile"
+      ],
+      "permission":"ALLOW"
+    },
+    {
+      "accessType":"EXECUTE",
+      "principalType":"ROLE",
+      "principalId":"HRD_salary",
+      "property":[
+        "__get__salary", "__update__salary", "__create__salary", "__destroy__salary", "__get__salary__user"
       ],
       "permission":"ALLOW"
     }

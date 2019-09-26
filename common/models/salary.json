@@ -39,7 +39,40 @@
         }
       }
     },
-    "acls": [],
+    "acls": [
+      {
+        "accessType":"READ",
+        "principalType":"ROLE",
+        "principalId":"$everyone",
+        "property":"*",
+        "permission":"DENY"
+      },
+      {
+        "accessType":"READ",
+        "principalType":"ROLE",
+        "principalId":"HRD_salary",
+        "property":"*",
+        "permission":"ALLOW"
+      },
+      {
+        "accessType":"EXECUTE",
+        "principalType":"ROLE",
+        "principalId":"$everyone",
+        "property":[
+          "create","deleteById","patchAttributes"
+        ],
+        "permission":"DENY"
+      },
+      {
+        "accessType":"EXECUTE",
+        "principalType":"ROLE",
+        "principalId":"HRD_salary",
+        "property":[
+          "create","deleteById","patchAttributes"
+        ],
+        "permission":"ALLOW"
+      }
+    ],
     "methods": {}
   }
   
