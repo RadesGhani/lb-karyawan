@@ -81,6 +81,16 @@
     "tipe_cuti":{
       "type":"string",
       "required":true
+    },
+    "ttd_ketua":{
+      "type":"boolean",
+      "required":true,
+      "default":false
+    },
+    "ttd_hrd":{
+      "type":"boolean",
+      "required":true,
+      "default":false
     }
   },
   "validations": [],
@@ -95,5 +105,9 @@
     }
   },
   "acls": [],
-  "methods": {}
+  "methods": {},
+  "scope": {
+    "include": "pengguna"
+  }
+
 }

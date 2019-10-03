@@ -32,7 +32,6 @@ module.exports = function(Kehadiran) {
         {id_pengguna : id, tanggal: tgl,
          waktu_masuk: masuk, waktu_keluar: null, nama_pengguna: namaPengguna}
       ],function(err, kehadiran){
-        if (err){return Promise.reject(err)};
         cb(null, kehadiran);
       })
     }
@@ -46,7 +45,7 @@ module.exports = function(Kehadiran) {
       const docs = await Kehadiran.find({where:{and: [{tanggal:tgl}, {id_pengguna:context.args.id_pengguna}]}});
       const docs1 = await app.models.pengguna.findById(context.args.id_pengguna);
       console.log(docs1)
-      if(docs[0] != undefined){
+      if(docs[0] != "undefined"){
         throw error;
       }else{
         namaPengguna = docs1.username;

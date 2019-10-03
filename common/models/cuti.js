@@ -1,7 +1,8 @@
 'use strict';
+const app = require('../../server/server');
 
 module.exports = function(Cuti) {
-
+    
     Cuti.validatesInclusionOf('tipe_cuti', {in: ['reg-first', 'bonus-first']});
 
     let isDelete = false;
@@ -103,7 +104,7 @@ module.exports = function(Cuti) {
     Cuti.observe('before save', function (ctx, next){
         let xdate, start; //mulai_cuti
         let ydate, end; //end-date
-        
+        console.log(ctx)
         isDue(ctx);
         //console.log("\nisDueValid = " + isDueValid)
         if(isDueValid != true){
@@ -173,4 +174,61 @@ module.exports = function(Cuti) {
         };
     })
     //END
+
+
+
+
+    {
+    //Cuti Approve
+    Cuti.remoteMethod(
+        'ttdKetua', {
+            http: {path: '/:id/ttdKetua', verb: 'post'},
+            accepts: [{arg: 'id', type: 'string', require: true},
+                      {arg: 'ttd_ketua', type: "boolean"}
+            ],
+            returns: {arg: 'ttdKetua', type: 'object'},
+            //description: ['a person object']
+        }
+    )
+    let tgl_pengajuan, mulai_cuti, selesai_cuti, keperluan, tugas_selesai1, tugas_selesai2, tugas_berjalan1, tugas_berjalan2, tugas_berjalan3, alih_tangan, tugas_alihan1, tugas_alihan2, saldo_reg_awal, saldo_reg_akhir, saldo_bonus_awal, saldo_bonus_akhir, tipe_cuti, ttd_hrd
+    Cuti.ttdKetua = function(id, ttd_ketua, cb) {
+        console.log (id + "\n" +ttd_ketua)
+        Cuti.replaceById(id,{
+            id:id, tgl_pengajuan:tgl_pengajuan, mulai_cuti:mulai_cuti, selesai_cuti:selesai_cuti, keperluan:keperluan, 
+            tugas_selesai1:tugas_selesai1, tugas_selesai2:tugas_selesai2, tugas_berjalan1:tugas_berjalan1, tugas_berjalan2:tugas_berjalan2, 
+            tugas_berjalan3:tugas_berjalan3, alih_tangan:alih_tangan, tugas_alihan1:tugas_alihan1, tugas_alihan2:tugas_alihan2, 
+            saldo_reg_awal:saldo_reg_awal, saldo_reg_akhir:saldo_reg_akhir, saldo_bonus_awal:saldo_bonus_awal, saldo_bonus_akhir:saldo_bonus_akhir, tipe_cuti:tipe_cuti, ttd_ketua:ttd_ketua, ttd_hrd:ttd_hrd
+          },function(err, cuti){
+            cb(null, cuti);
+          })
+        
+    }    
+   
+    Cuti.beforeRemote('ttdKetua', async (context, err) => {
+        const error = {
+          statusCode: "400",
+          message: "ERROR : Anda telah menyetujui pengajuan cuti ini."
+        };
+        const docs = await Cuti.find({where:{id:context.args.id}});
+        tgl_pengajuan = docs[0].tgl_pengajuan
+        mulai_cuti = docs[0].mulai_cuti
+        selesai_cuti = docs[0].selesai_cuti
+        keperluan = docs[0].keperluan
+        tugas_selesai1 = docs[0].tugas_selesai1
+        tugas_selesai2 = docs[0].tugas_selesai2
+        tugas_berjalan1 = docs[0].tugas_berjalan1
+        tugas_berjalan2 = docs[0].tugas_berjalan2
+        tugas_berjalan3 = docs[0].tugas_berjalan3
+        alih_tangan = docs[0].alih_tangan
+        tugas_alihan1 = docs[0].tugas_alihan1
+        tugas_alihan2 = docs[0].tugas_alihan2
+        saldo_reg_awal = docs[0].saldo_reg_awal
+        saldo_reg_akhir = docs[0].saldo_reg_akhir
+        saldo_bonus_awal = docs[0].saldo_bonus_awal
+        saldo_bonus_akhir = docs[0].saldo_bonus_akhir
+        tipe_cuti = docs[0].tipe_cuti
+        ttd_hrd = docs[0].ttd_hrd
+        
+    })
+    }
 };

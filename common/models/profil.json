@@ -2,7 +2,7 @@
   "name": "profil",
   "plural": "profil",
   "base": "PersistedModel",
-  "idInjection": true,
+  "idInjection": false,
   "options": {
     "validateUpsert": true
   },
@@ -13,7 +13,8 @@
   "properties": {
     "id_pengguna": {
       "type": "number",
-      "required": true
+      "required": true,
+      "id":true
     },
     "nik": {
       "type": "number"

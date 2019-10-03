@@ -5,7 +5,7 @@ module.exports = function(Profil) {
   Profil.validatesInclusionOf('jenis_kelamin', {in: ['Laki', 'Perempuan']});
   Profil.observe('before save', function(ctx, next) {
     if (ctx.instance && ctx.instance.id_pengguna) {
-      return Profil.app.models.pengguna.count({id:
+      return Profil.app.models.pengguna.count({id_pengguna:
       ctx.instance.id_pengguna,
       }).then(
             res => {

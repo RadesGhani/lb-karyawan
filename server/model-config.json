@@ -8,82 +8,82 @@
     ]
   },
   "User": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": false
   },
   "AccessToken": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": false
   },
   "ACL": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": false
   },
   "Role": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": false
   },
   "Email": {
     "dataSource": "emailDs"
   },
   "pengguna": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": true,
     "options": {}
   },
   "acl": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": false,
     "options": {}
   },
   "role": {
-    "dataSource": "mongoDs",
-    "public": false,
+    "dataSource": "postgresDs",
+    "public": true,
     "options": {}
   },
   "roleMapping": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": true,
     "options": {}
   },
   "cuti": {
-    "dataSource": "mongoDs",
-    "public": false
+    "dataSource": "postgresDs",
+    "public": true
   },
   "saldo_cuti": {
-    "dataSource": "mongoDs",
-    "public": false
+    "dataSource": "postgresDs",
+    "public": true
   },
   "tugas": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": false
   },
   "kehadiran": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": true
   },
   "tim": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": false
   },
   "inventaris": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": false
   },
   "profil": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": false
   },
   "gaji": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": false
   },
   "pinjaman": {
-    "dataSource": "mongoDs",
+    "dataSource": "postgresDs",
     "public": false
   }
 }
