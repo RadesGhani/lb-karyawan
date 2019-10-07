@@ -97,7 +97,7 @@
       "accessType": "EXECUTE",
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "DENY",
+      "permission": "ALLOW",
       "property": "*"
     },
     {
@@ -126,6 +126,7 @@
       "property": [
         "find", "create", "deleteById", "patchAttributes",
         "__create__cuti", "__destroyById__cuti", "__updateById__cuti",
+         
         "__create__kehadiran", "__destroyById__kehadiran", "__updateById__kehadiran",
         "__get__kehadiran",
         "__get__profil",
@@ -145,6 +146,7 @@
       "principalId": "$owner",
       "permission": "ALLOW",
       "property": [
+        "__get__saldo_cuti",
         "__create__cuti",
         "__destroyById__cuti",
         "__updateById__cuti",
