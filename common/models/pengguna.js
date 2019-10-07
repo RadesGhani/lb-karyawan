@@ -100,11 +100,20 @@ module.exports = function(Pengguna) {
     let reg_before, reg_after, bonus_before, bonus_after, penggunaid, tgl_masuk_after, exp_after, id_after, id_cuti;
 
     Pengguna.beforeRemote('*.__create__cuti', async (context, err) => {
-      const error = {
+      const error = [{
         statusCode: "400",
         message: "ERROR : Saldo cuti tidak mencukupi."
-      };
-
+      },
+      {
+        statusCode: "400",
+        message: "ERROR : ttd_ketua dan ttd_hrd tidak boleh diisi."
+      }
+      ];
+      
+      if(context.args.data.ttd_ketua != undefined || context.args.data.ttd_hrd != undefined) throw (error[1])
+      const profil = await app.models.profil.find({where:{id_pengguna : context.instance.id}});
+      console.log(profil)
+      context.args.data.nama = profil[0].nama
       const docs = await app.models.saldo_cuti.find({where:{id_pengguna : context.instance.id}});
       let mulai_cuti = new Date(context.args.data.mulai_cuti.substr(0,4), context.args.data.mulai_cuti.substr(5,2) - 1, context.args.data.mulai_cuti.substr(8,2))
       let selesai_cuti = new Date(context.args.data.selesai_cuti.substr(0,4), context.args.data.selesai_cuti.substr(5,2) - 1, context.args.data.selesai_cuti.substr(8,2))
@@ -126,7 +135,7 @@ module.exports = function(Pengguna) {
           let y = lama_cuti - g;
           y = h - y;
           if(y < 0){
-            throw (error);
+            throw (error[0]);
           }else{
             if(i == true){
               reg_after = 0;
@@ -182,9 +191,4 @@ module.exports = function(Pengguna) {
       })
     })
   }
-
-  {//logika kehadiran
-
-  }
-
 };

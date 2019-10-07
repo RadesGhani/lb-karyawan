@@ -21,4 +21,32 @@ module.exports = function(Profil) {
     }
     return next();
   });
+
+  Profil.remoteMethod(
+    'nama',
+    {
+      accepts: {arg: 'id_pengguna', type: "number", required: 'true'},
+      http: {path: '/:id/nama', verb: 'post'},
+      returns: {arg: 'nama', type: 'object'}
+    }
+  )
+
+  Profil.nama = async (id_pengguna,err)=>{
+    try{
+      const docs = await Profil.find({where:{id_pengguna:id_pengguna}})
+      const docs1 = await Profil.find({where:{tim:docs[0].tim}})
+      let x = 0
+      let nama= []
+      docs1.forEach(element => {
+        nama[x]=docs1[x].nama
+        console.log(nama[x])
+        x = x + 1
+      });
+      //console.log (nama)
+      return nama
+    }catch(err){
+      if (err) throw err
+    }
+  }
+
 };

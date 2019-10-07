@@ -76,7 +76,7 @@
   },
   "profil": {
     "dataSource": "postgresDs",
-    "public": false
+    "public": true
   },
   "gaji": {
     "dataSource": "postgresDs",

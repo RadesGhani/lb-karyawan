@@ -12,6 +12,10 @@
     "table": "cuti"
   },
   "properties": {
+    "nama":{
+      "type":"string",
+      "required":true
+    },
     "tgl_pengajuan":{
       "type":"string",
       "required":true
@@ -84,13 +88,11 @@
     },
     "ttd_ketua":{
       "type":"boolean",
-      "required":true,
-      "default":false
+      "required":false
     },
     "ttd_hrd":{
       "type":"boolean",
-      "required":true,
-      "default":false
+      "required":false
     }
   },
   "validations": [],
@@ -104,10 +106,36 @@
       }
     }
   },
-  "acls": [],
-  "methods": {},
-  "scope": {
-    "include": "pengguna"
-  }
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY",
+      "property": "*"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "*"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "HRD",
+      "permission": "ALLOW",
+      "property": "*"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "*"
+    }
+  ],
+  "methods": {}
 
 }

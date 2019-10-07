@@ -1,10 +1,10 @@
 'use strict';
-const app = require('../../server/server');
 
 module.exports = function(Cuti) {
     
     Cuti.validatesInclusionOf('tipe_cuti', {in: ['reg-first', 'bonus-first']});
-
+    
+    let isApproval = false;
     let isDelete = false;
     let isDueValid = false;
     let dayMonthValid = false;
@@ -102,9 +102,9 @@ module.exports = function(Cuti) {
     
     //operation hook validasi tanggal cuti (POST/PUT)
     Cuti.observe('before save', function (ctx, next){
+        if (isApproval == true) return next();
         let xdate, start; //mulai_cuti
         let ydate, end; //end-date
-        console.log(ctx)
         isDue(ctx);
         //console.log("\nisDueValid = " + isDueValid)
         if(isDueValid != true){
@@ -175,60 +175,99 @@ module.exports = function(Cuti) {
     })
     //END
 
-
-
-
     {
-    //Cuti Approve
-    Cuti.remoteMethod(
-        'ttdKetua', {
-            http: {path: '/:id/ttdKetua', verb: 'post'},
-            accepts: [{arg: 'id', type: 'string', require: true},
-                      {arg: 'ttd_ketua', type: "boolean"}
-            ],
-            returns: {arg: 'ttdKetua', type: 'object'},
-            //description: ['a person object']
+        let docs
+        Cuti.remoteMethod(
+            'ttdKetua',
+            {
+              accepts: [{arg: 'id_cuti', type: 'string', required: 'true'},{arg: 'persetujuan', type: "boolean", required: 'true'}],
+              http: {path: '/:id/ttdKetua', verb: 'post'},
+              returns: {arg: 'status', type: 'object'}
+            }
+        )
+
+        Cuti.ttdKetua = function(id_cuti, persetujuan, cb){
+            const error = {
+                statusCode: "400",
+                message: "ERROR : Id cuti tidak ditemukan."
+            }
+            if (typeof docs[0] == "undefined"){
+                return Promise.reject(error)
+            }
+            isApproval = true
+            docs[0].tgl_pengajuan = docs[0].tgl_pengajuan.toLocaleString()
+            docs[0].mulai_cuti = docs[0].mulai_cuti.toLocaleString()
+            docs[0].selesai_cuti = docs[0].selesai_cuti.toLocaleString()
+            Cuti.upsertWithWhere({id:id_cuti},{
+                id:id_cuti, nama:docs[0].nama, tgl_pengajuan:docs[0].tgl_pengajuan,
+                mulai_cuti: docs[0].mulai_cuti, selesai_cuti:docs[0].selesai_cuti, keperluan:docs[0].keperluan,
+                tugas_selesai1: docs[0].tugas_selesai1, tugas_selesai2: docs[0].tugas_selesai2, tugas_berjalan1: docs[0].tugas_berjalan1,
+                tugas_berjalan2: docs[0].tugas_berjalan2, tugas_berjalan3: docs[0].tugas_berjalan3, alih_tangan: docs[0].alih_tangan,
+                tugas_alihan1: docs[0].tugas_alihan1, tugas_alihan2: docs[0].tugas_alihan2, saldo_reg_awal: docs[0].saldo_reg_awal,
+                saldo_reg_akhir: docs[0].saldo_reg_akhir, saldo_bonus_awal: docs[0].saldo_bonus_awal, saldo_bonus_akhir: docs[0].saldo_bonus_akhir,
+                tipe_cuti: docs[0].tipe_cuti, ttd_ketua: persetujuan, ttd_hrd: docs[0].ttd_hrd, id_pengguna: docs[0].id_pengguna,
+            },function(){
+                cb(null, "BERHASIL")
+            })
         }
-    )
-    let tgl_pengajuan, mulai_cuti, selesai_cuti, keperluan, tugas_selesai1, tugas_selesai2, tugas_berjalan1, tugas_berjalan2, tugas_berjalan3, alih_tangan, tugas_alihan1, tugas_alihan2, saldo_reg_awal, saldo_reg_akhir, saldo_bonus_awal, saldo_bonus_akhir, tipe_cuti, ttd_hrd
-    Cuti.ttdKetua = function(id, ttd_ketua, cb) {
-        console.log (id + "\n" +ttd_ketua)
-        Cuti.replaceById(id,{
-            id:id, tgl_pengajuan:tgl_pengajuan, mulai_cuti:mulai_cuti, selesai_cuti:selesai_cuti, keperluan:keperluan, 
-            tugas_selesai1:tugas_selesai1, tugas_selesai2:tugas_selesai2, tugas_berjalan1:tugas_berjalan1, tugas_berjalan2:tugas_berjalan2, 
-            tugas_berjalan3:tugas_berjalan3, alih_tangan:alih_tangan, tugas_alihan1:tugas_alihan1, tugas_alihan2:tugas_alihan2, 
-            saldo_reg_awal:saldo_reg_awal, saldo_reg_akhir:saldo_reg_akhir, saldo_bonus_awal:saldo_bonus_awal, saldo_bonus_akhir:saldo_bonus_akhir, tipe_cuti:tipe_cuti, ttd_ketua:ttd_ketua, ttd_hrd:ttd_hrd
-          },function(err, cuti){
-            cb(null, cuti);
-          })
         
-    }    
-   
-    Cuti.beforeRemote('ttdKetua', async (context, err) => {
-        const error = {
-          statusCode: "400",
-          message: "ERROR : Anda telah menyetujui pengajuan cuti ini."
-        };
-        const docs = await Cuti.find({where:{id:context.args.id}});
-        tgl_pengajuan = docs[0].tgl_pengajuan
-        mulai_cuti = docs[0].mulai_cuti
-        selesai_cuti = docs[0].selesai_cuti
-        keperluan = docs[0].keperluan
-        tugas_selesai1 = docs[0].tugas_selesai1
-        tugas_selesai2 = docs[0].tugas_selesai2
-        tugas_berjalan1 = docs[0].tugas_berjalan1
-        tugas_berjalan2 = docs[0].tugas_berjalan2
-        tugas_berjalan3 = docs[0].tugas_berjalan3
-        alih_tangan = docs[0].alih_tangan
-        tugas_alihan1 = docs[0].tugas_alihan1
-        tugas_alihan2 = docs[0].tugas_alihan2
-        saldo_reg_awal = docs[0].saldo_reg_awal
-        saldo_reg_akhir = docs[0].saldo_reg_akhir
-        saldo_bonus_awal = docs[0].saldo_bonus_awal
-        saldo_bonus_akhir = docs[0].saldo_bonus_akhir
-        tipe_cuti = docs[0].tipe_cuti
-        ttd_hrd = docs[0].ttd_hrd
-        
-    })
+        Cuti.beforeRemote('ttdKetua', async(context)=>{
+            try{
+                docs = await(Cuti.find({where:{id:context.args.id_cuti}}))
+                return
+            }catch(err){
+                if (err) throw err
+            }
+        })
+
+        {
+            let docs
+            Cuti.remoteMethod(
+                'ttdHRD',
+                {
+                  accepts: [{arg: 'id_cuti', type: 'string', required: 'true'},{arg: 'persetujuan', type: "boolean", required: 'true'}],
+                  http: {path: '/:id/ttdHRD', verb: 'post'},
+                  returns: {arg: 'status', type: 'object'}
+                }
+            )
+    
+            Cuti.ttdHRD = function(id_cuti, persetujuan, cb){
+                const error = [{
+                    statusCode: "400",
+                    message: "ERROR : Id cuti tidak ditemukan."
+                },
+                {
+                    statusCode: "400",
+                    message: "ERROR : Belum ada persetujuan dari ketua tim."
+                }
+                ]
+                if (typeof docs[0] == "undefined") return Promise.reject(error[0])
+                if (docs[0].ttd_ketua == false || docs[0].ttd_ketua == undefined) return Promise.reject(error[1])
+                isApproval = true
+                docs[0].tgl_pengajuan = docs[0].tgl_pengajuan.toLocaleString()
+                docs[0].mulai_cuti = docs[0].mulai_cuti.toLocaleString()
+                docs[0].selesai_cuti = docs[0].selesai_cuti.toLocaleString()
+                Cuti.upsertWithWhere({id:id_cuti},{
+                    id:id_cuti, nama:docs[0].nama, tgl_pengajuan:docs[0].tgl_pengajuan,
+                    mulai_cuti: docs[0].mulai_cuti, selesai_cuti:docs[0].selesai_cuti, keperluan:docs[0].keperluan,
+                    tugas_selesai1: docs[0].tugas_selesai1, tugas_selesai2: docs[0].tugas_selesai2, tugas_berjalan1: docs[0].tugas_berjalan1,
+                    tugas_berjalan2: docs[0].tugas_berjalan2, tugas_berjalan3: docs[0].tugas_berjalan3, alih_tangan: docs[0].alih_tangan,
+                    tugas_alihan1: docs[0].tugas_alihan1, tugas_alihan2: docs[0].tugas_alihan2, saldo_reg_awal: docs[0].saldo_reg_awal,
+                    saldo_reg_akhir: docs[0].saldo_reg_akhir, saldo_bonus_awal: docs[0].saldo_bonus_awal, saldo_bonus_akhir: docs[0].saldo_bonus_akhir,
+                    tipe_cuti: docs[0].tipe_cuti, ttd_ketua: docs[0].ttd_ketua, ttd_hrd: persetujuan, id_pengguna: docs[0].id_pengguna,
+                },function(){
+                    cb(null, "BERHASIL")
+                })
+            }
+            
+            Cuti.beforeRemote('ttdHRD', async(context)=>{
+                try{
+                    docs = await(Cuti.find({where:{id:context.args.id_cuti}}))
+                    return
+                }catch(err){
+                    if (err) throw err
+                }
+            })
+        }
     }
 };

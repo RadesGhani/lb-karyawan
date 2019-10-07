@@ -94,74 +94,40 @@
   },
   "acls": [
     {
-      "accessType": "READ",
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW",
-      "property": "*"
-    },
-    {
-      "accessType": "READ",
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW",
-      "property": "*"
-    },
-    {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "DENY",
-      "property": [
-        "create",
-        "deleteById",
-        "patchAttributes",
-        "__delete__cuti",
-        "__create__cuti",
-        "__destroyById__cuti",
-        "__updateById__cuti",
-        "__delete__saldo_cuti",
-        "__create__saldo_cuti",
-        "__destroyById__saldo_cuti",
-        "__updateById__saldo_cuti",
-        "__delete__kehadiran",
-        "__create__kehadiran",
-        "__destroyById__kehadiran",
-        "__updateById__kehadiran",
-        "__get__kehadiran",
-        "__get__profil",
-        "__delete__profil",
-        "__create__profil",
-        "__destroyById__profil",
-        "__updateById__profil",
-        "__update__profil",
-        "__create__tim__tugas",
-        "__get__tim",
-        "__get__tugas"
-      ]
+      "property": "*"
     },
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
       "principalId": "admin",
       "permission": "ALLOW",
+      "property": "*"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
       "property": [
-        "create",
-        "deleteById",
-        "patchAttributes",
-        "__delete__cuti",
-        "__create__cuti",
-        "__destroyById__cuti",
-        "__updateById__cuti",
-        "__destroy__saldo_cuti",
-        "__create__saldo_cuti",
-        "__update__saldo_cuti",
-        "__delete__kehadiran",
-        "__create__kehadiran",
-        "__destroyById__kehadiran",
-        "__updateById__kehadiran",
+        "find", "patchAttributes",
+        "__create__cuti", "__destroyById__cuti",
+        "__updateById__"
+      ]
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "HRD",
+      "permission": "ALLOW",
+      "property": [
+        "find", "create", "deleteById", "patchAttributes",
+        "__create__cuti", "__destroyById__cuti", "__updateById__cuti",
+        "__create__kehadiran", "__destroyById__kehadiran", "__updateById__kehadiran",
         "__get__kehadiran",
-        "__find__profil",
         "__get__profil",
         "__create__profil",
         "__destroy__profil",
@@ -171,21 +137,6 @@
         "__get__tim",
         "__get__tugas",
         "__create__tugas"
-      ]
-    },
-    {
-      "accessType": "EXECUTE",
-      "principalType": "ROLE",
-      "principalId": "adminhrd",
-      "permission": "ALLOW",
-      "property": [
-        "__delete__cuti",
-        "__create__cuti",
-        "__destroyById__cuti",
-        "__updateById__cuti",
-        "__destroy__saldo_cuti",
-        "__create__saldo_cuti",
-        "__update__saldo_cuti"
       ]
     },
     {

@@ -44,8 +44,8 @@ module.exports = function(Kehadiran) {
       };
       const docs = await Kehadiran.find({where:{and: [{tanggal:tgl}, {id_pengguna:context.args.id_pengguna}]}});
       const docs1 = await app.models.pengguna.findById(context.args.id_pengguna);
-      console.log(docs1)
-      if(docs[0] != "undefined"){
+      console.log(docs)
+      if(typeof docs[0] != "undefined"){
         throw error;
       }else{
         namaPengguna = docs1.username;
@@ -89,7 +89,7 @@ module.exports = function(Kehadiran) {
       ];
 
       docs = await Kehadiran.find({where:{and: [{tanggal:tgl},{id_pengguna:context.args.id_pengguna}]}});
-      if(docs[0] != undefined){
+      if(typeof docs[0] != "undefined"){
         if(docs[0].waktu_keluar != null){
           throw error[1];
         }else{

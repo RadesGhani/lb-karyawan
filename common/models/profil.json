@@ -209,7 +209,8 @@
       "type": "string"
     },
     "tim": {
-      "type": "string"
+      "type": "string",
+      "default": "none"
     },
     "email_1": {
       "type": "string"
@@ -230,5 +231,6 @@
     }
   },
   "acls": [],
-  "methods": {}
+  "methods": {},
+  "scope": {}
 }
