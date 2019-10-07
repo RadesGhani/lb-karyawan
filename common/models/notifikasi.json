@@ -1,0 +1,36 @@
+{
+    "name": "notifikasi",
+    "plural": "notifikasi",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+      "validateUpsert": true
+    },
+    "postgresql": {
+      "schema": "public",
+      "table": "notifikasi"
+    },
+    "properties": {
+      "nama": {
+        "type": "string",
+        "required": true
+      },
+      "pesan": {
+        "type": "string",
+        "required": true
+      },
+      "tanggal_berlaku": {
+        "type": "string",
+        "required": true
+      },
+      "tanggal_berakhir": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "validations": [],
+    "relations": {},
+    "acls": [],
+    "methods": {}
+  }
+  
