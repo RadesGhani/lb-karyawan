@@ -97,7 +97,7 @@
       "accessType": "EXECUTE",
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "ALLOW",
+      "permission": "DENY",
       "property": "*"
     },
     {
@@ -110,12 +110,24 @@
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "find"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
       "property": [
         "find", "patchAttributes",
-        "__create__cuti", "__destroyById__cuti",
-        "__updateById__"
+        "__get__cuti", "__create__cuti", "__delete__cuti", "__destroyById__cuti", "__updateById__cuti",
+        "__get__profil", "__create__profil", "__update__profil", "__updateById__profil", "__find__profil",
+        "__get__saldo__cuti", "__get__saldo__cuti",
+        "__get__kehadiran", "__create__kehadiran",
+        "__kehadiran__find", "__kehadiran__masuk","__kehadiran__pulang",
+        "__get__tim",
+        "__get__tugas"
       ]
     },
     {
@@ -126,7 +138,6 @@
       "property": [
         "find", "create", "deleteById", "patchAttributes",
         "__create__cuti", "__destroyById__cuti", "__updateById__cuti",
-         
         "__create__kehadiran", "__destroyById__kehadiran", "__updateById__kehadiran",
         "__get__kehadiran",
         "__get__profil",
@@ -138,30 +149,6 @@
         "__get__tim",
         "__get__tugas",
         "__create__tugas"
-      ]
-    },
-    {
-      "accessType": "EXECUTE",
-      "principalType": "ROLE",
-      "principalId": "$owner",
-      "permission": "ALLOW",
-      "property": [
-        "__get__saldo_cuti",
-        "__create__cuti",
-        "__destroyById__cuti",
-        "__updateById__cuti",
-        "__create__kehadiran",
-        "__get__kehadiran",
-        "__kehadiran__find",
-        "__kehadiran__masuk",
-        "__kehadiran__pulang",
-        "__get__profil",
-        "__create__profil",
-        "__updateById__profil",
-        "__update__profil",
-        "__find__profil",
-        "__get__tim",
-        "__get__tugas"
       ]
     }
   ],

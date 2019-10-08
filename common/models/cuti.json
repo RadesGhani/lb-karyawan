@@ -108,7 +108,7 @@
   },
   "acls": [
     {
-      "accessType": "*",
+      "accessType": "EXECUTE",
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "DENY",
@@ -117,7 +117,7 @@
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
-      "principalId": "$owner",
+      "principalId": "admin",
       "permission": "ALLOW",
       "property": "*"
     },
@@ -126,14 +126,18 @@
       "principalType": "ROLE",
       "principalId": "HRD",
       "permission": "ALLOW",
-      "property": "*"
+      "property": [
+        "find", "ttdHRD"
+      ]
     },
     {
-      "accessType": "*",
+      "accessType": "EXECUTE",
       "principalType": "ROLE",
-      "principalId": "admin",
+      "principalId": "leader",
       "permission": "ALLOW",
-      "property": "*"
+      "property": [
+        "find", "ttdKetua"
+      ]
     }
   ],
   "methods": {}
